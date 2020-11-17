@@ -1,6 +1,9 @@
-export default class Editor {
-    constructor() {
+import EditorHtmlPanel from './EditorHtmlPanel.js';
 
+export default class Editor {
+    constructor(nodes) {
+        this.nodes = nodes;
+        this.editorHtmlPanel = new EditorHtmlPanel(nodes);
     }
 
     render() {
