@@ -30,3 +30,21 @@ body {
     height: 100%;
     background-color: $color-secondary;
 }
+
+@keyframes dance {
+    0% {
+        transform: matrix(1, 0, .05, 1, -4, 0);
+    }
+
+    50% {
+        transform: matrix(1, 0, 0, .9, 0, 8);
+    }
+
+    100% {
+        transform: matrix(1, 0, -.05, 1, 4, 0);
+    }
+}
+
+.dance {
+    animation: dance .5s infinite alternate;
+}

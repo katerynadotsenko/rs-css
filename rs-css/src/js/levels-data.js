@@ -2,7 +2,16 @@ const levelsData = [
     {
         level: 1,
         help: 'help',
-        nodes: ['branch', [['bird', ['egg', 'egg']], 'bird']]
+        nodes: ['branch', [
+            {
+                name:'bird',
+                className: 'dance'
+            }, 
+            {
+                name:'nest'
+            }
+        ]
+        ]
     }
 ];
 
