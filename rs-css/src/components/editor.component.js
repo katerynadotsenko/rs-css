@@ -1,6 +1,6 @@
-import EditorHtmlPanel from './EditorHtmlPanel.js';
+import EditorHtmlPanel from './editor-html-panel.component.js';
 
-export default class Editor {
+export default class EditorComponent {
     constructor(nodes) {
         this.nodes = nodes;
         this.editorHtmlPanel = new EditorHtmlPanel(nodes);

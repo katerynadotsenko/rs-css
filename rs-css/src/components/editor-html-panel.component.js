@@ -1,4 +1,4 @@
-export default class EditorHtmlPanel {
+export default class EditorHtmlPanelComponent {
     constructor(nodes) {
         this.nodes = nodes;
     }

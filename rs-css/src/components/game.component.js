@@ -1,4 +1,4 @@
-export default class Game {
+export default class GameComponent {
     constructor(nodes) {
         this.nodes = nodes;
     }
@@ -30,7 +30,10 @@ export default class Game {
 
         if (!Array.isArray(childNode)) {
 
-            const childElement = document.createElement(`${childNode}`);
+            const childElement = document.createElement(`${childNode.name}`);
+            if (childNode.className) {
+                childElement.classList.add(`${childNode.className}`);
+            }
             parentNode.append(childElement);
 
         } else {
@@ -39,11 +42,11 @@ export default class Game {
 
                 if (Array.isArray(node)) {
                     const childElement = document.createElement(`${node[0].name}`);
-                    if (node.className) {
-                        childElement.classList.add(`${node.className}`);
+                    if (node[0].className) {
+                        childElement.classList.add(`${node[0].className}`);
                     }
                     parentNode.append(childElement);
-                    this.generateNodes(childElement, node[1].name)
+                    this.generateNodes(childElement, node[1])
                 } else {
                     const childElement = document.createElement(`${node.name}`);
                     if (node.className) {

@@ -33,15 +33,15 @@ body {
 
 @keyframes dance {
     0% {
-        transform: matrix(1, 0, .05, 1, -4, 0);
+        transform: matrix(1, 0, .05, 1, -2, 0);
     }
 
     50% {
-        transform: matrix(1, 0, 0, .9, 0, 8);
+        transform: matrix(1, 0, 0, .9, 0, 4);
     }
 
     100% {
-        transform: matrix(1, 0, -.05, 1, 4, 0);
+        transform: matrix(1, 0, -.05, 1, 2, 0);
     }
 }
 

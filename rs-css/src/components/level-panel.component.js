@@ -1,4 +1,4 @@
-export default class LevelPanel {
+export default class LevelPanelComponent {
     constructor() {
 
     }

@@ -33,13 +33,13 @@ body {
 
 @keyframes dance {
   0% {
-    transform: matrix(1, 0, 0.05, 1, -4, 0);
+    transform: matrix(1, 0, 0.05, 1, -2, 0);
   }
   50% {
-    transform: matrix(1, 0, 0, 0.9, 0, 8);
+    transform: matrix(1, 0, 0, 0.9, 0, 4);
   }
   100% {
-    transform: matrix(1, 0, -0.05, 1, 4, 0);
+    transform: matrix(1, 0, -0.05, 1, 2, 0);
   }
 }
 .dance {
@@ -58,20 +58,23 @@ body {
 .game__branch:before {
   content: "";
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   display: block;
   width: 100%;
   height: 100%;
   background-image: url("/src/assets/img/branch.png");
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: bottom;
   background-size: contain;
 }
 .game__branch__container {
   position: absolute;
+  display: flex;
+  align-items: flex-end;
   width: 45%;
-  top: 12vh;
+  height: 100%;
+  bottom: 0;
   left: 50%;
 }
 
@@ -81,11 +84,12 @@ bird {
   width: 10vw;
   height: 10vw;
   transform: matrix(1, 0, 0, 1, 0, 0);
+  z-index: 1;
 }
 bird:after {
   content: "";
   position: absolute;
-  top: 0;
+  bottom: 38%;
   left: 0;
   display: block;
   width: 100%;
@@ -94,6 +98,33 @@ bird:after {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+}
+
+egg {
+  position: relative;
+  display: inline-block;
+  width: 5vw;
+  height: 5vw;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+  z-index: 1;
+}
+egg:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+egg.green:after {
+  background-image: url("/src/assets/img/egg-green.png");
+}
+egg.pink:after {
+  background-image: url("/src/assets/img/egg-pink.png");
 }
 
 nest {
@@ -106,7 +137,7 @@ nest {
 nest:after {
   content: "";
   position: absolute;
-  bottom: -40%;
+  bottom: 0;
   left: 0;
   display: block;
   width: 100%;
@@ -115,6 +146,13 @@ nest:after {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+}
+nest bird {
+  top: -10%;
+}
+nest egg {
+  left: 50%;
+  transform: matrix(1, 0, 0, 1, 0, 0) translateX(-50%);
 }
 
 .editor {
