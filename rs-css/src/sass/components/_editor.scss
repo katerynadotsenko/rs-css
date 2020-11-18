@@ -1,7 +1,91 @@
 .editor {
+    font-family: monospace, sans-serif;
+    display: flex;
     width: 90%;
-    height: 50%;
+    height: 40%;
     border-radius: 3px;
     background-color: $color-secondary;
     margin-left: 20px;
+    padding: 10px;
+}
+
+
+.css-panel {
+    flex-basis: 50%;
+    height: 100%;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+        height: 50px;
+        border-top: 1px solid $color-primary;
+        border-left: 1px solid $color-primary;
+        background-color: $color-dark;
+    }
+
+    &__window {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        position: relative;
+        height: calc(100% - 50px);
+        background: $color-light-3;
+        color: $color-light;
+        font-size: 1.4rem;
+        line-height: 2rem;
+        padding: 5px 5px 5px 50px;
+    }
+
+    &__line-numbers {
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 40px;
+        height: 100%;
+        color: $color-light;
+        background: $color-light-2;
+    }
+}
+
+.html-panel {
+    flex-basis: 50%;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+        height: 50px;
+        border-top: 1px solid $color-primary;
+        border-right: 1px solid $color-primary;
+        background-color: $color-dark;
+    }
+
+    &__window {
+        position: relative;
+        height: calc(100% - 50px);
+        border: 1px solid $color-primary;
+        color: $color-light;
+        font-size: 1.4rem;
+        line-height: 2rem;
+        padding: 5px 50px;
+    }
+
+    &__line-numbers {
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 40px;
+        height: 100%;
+        border-right: 1px solid $color-primary;
+        color: $color-light;
+    }
 }
