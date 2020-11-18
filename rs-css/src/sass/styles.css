@@ -6,12 +6,21 @@
 
 html {
   font-size: 10px;
+  color: #a0a0a0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
   display: flex;
   height: 100vh;
+}
+
+h3 {
+  padding-bottom: 10px;
+}
+
+h4 {
+  padding-bottom: 15px;
 }
 
 .left-container {
@@ -21,34 +30,53 @@ body {
   align-items: center;
   height: 100%;
   background-color: #3a3938;
-  padding: 20px;
+  font-size: 1.5rem;
+  padding-right: 20px;
 }
 
 .right-container {
   flex-grow: 1;
-  min-width: 300px;
+  max-width: 370px;
   height: 100%;
   background-color: #20201f;
+  font-size: 1.5rem;
+  line-height: 2.3rem;
+}
+
+tag {
+  font-family: monospace, sans-serif;
+  background-color: #2b2b2b;
+  padding: 2px 7px;
+  font-size: 1.3rem;
 }
 
 @keyframes dance {
   0% {
-    transform: matrix(1, 0, 0.05, 1, -2, 0);
+    transform: matrix(1, 0, 0.05, 1, -1, 0);
   }
   50% {
-    transform: matrix(1, 0, 0, 0.9, 0, 4);
+    transform: matrix(1, 0, 0, 0.9, 0, 2);
   }
   100% {
-    transform: matrix(1, 0, -0.05, 1, 2, 0);
+    transform: matrix(1, 0, -0.05, 1, 1, 0);
   }
 }
 .dance {
   animation: dance 0.5s infinite alternate;
 }
 
+.task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 15%;
+  font-size: 5rem;
+}
+
 .game {
   width: 100%;
-  height: 50%;
+  height: 35%;
 }
 .game__branch {
   position: relative;
@@ -65,17 +93,16 @@ body {
   height: 100%;
   background-image: url("/src/assets/img/branch.png");
   background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: contain;
+  background-position: 100% 100%;
+  background-size: 110%;
 }
 .game__branch__container {
-  position: absolute;
   display: flex;
+  justify-content: center;
   align-items: flex-end;
-  width: 45%;
+  width: 100%;
   height: 100%;
   bottom: 0;
-  left: 50%;
 }
 
 bird {
@@ -160,6 +187,35 @@ nest egg {
   height: 50%;
   border-radius: 3px;
   background-color: #20201f;
+  margin-left: 20px;
+}
+
+.level-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+.level-panel__header {
+  height: 70px;
+}
+.level-panel__description {
+  display: flex;
+  flex-direction: column;
+}
+
+.description__syntax tag {
+  font-size: 2rem;
+  line-height: 7rem;
+  padding: 8px 10px;
+  border: 1px solid #333333;
+}
+.description__hint {
+  padding-bottom: 30px;
+}
+.description__example {
+  padding-bottom: 8px;
 }
 
 /*# sourceMappingURL=styles.css.map */

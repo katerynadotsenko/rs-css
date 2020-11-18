@@ -15,6 +15,7 @@ export default class GameComponent {
     generateDom() {
         const branch = document.createElement('div');
         branch.classList.add('game__branch');
+        
         const branchContainer = document.createElement('div');
         branchContainer.classList.add('game__branch__container');
 
