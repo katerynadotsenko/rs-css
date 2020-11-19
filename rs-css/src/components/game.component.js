@@ -31,32 +31,36 @@ export default class GameComponent {
 
         if (!Array.isArray(childNode)) {
 
-            const childElement = document.createElement(`${childNode.name}`);
-            if (childNode.className) {
-                childElement.classList.add(`${childNode.className}`);
-            }
-            parentNode.append(childElement);
+            this.appendChildElement(parentNode, childNode);
 
         } else {
 
             childNode.forEach(node => {
 
                 if (Array.isArray(node)) {
-                    const childElement = document.createElement(`${node[0].name}`);
-                    if (node[0].className) {
-                        childElement.classList.add(`${node[0].className}`);
-                    }
-                    parentNode.append(childElement);
-                    this.generateNodes(childElement, node[1])
+
+                    const childElement = this.appendChildElement(parentNode, node[0]);
+                    this.generateNodes(childElement, node[1]);
+
                 } else {
-                    const childElement = document.createElement(`${node.name}`);
-                    if (node.className) {
-                        childElement.classList.add(`${node.className}`);
-                    }
-                    parentNode.append(childElement);
+
+                    this.appendChildElement(parentNode, node);
+
                 }
 
             });
         }
+    }
+
+    appendChildElement(parentNode, childNode) {
+        const childElement = document.createElement(`${childNode.type}`);
+
+        if (childNode.className) {
+            childElement.classList.add(`${childNode.className}`);
+        }
+
+        parentNode.append(childElement);
+
+        return childElement;
     }
 }

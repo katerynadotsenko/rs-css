@@ -4,11 +4,11 @@ const levelsData = [
         nodes: ['branch', 
             [
                 {
-                    name:'bird',
+                    type:'bird',
                     className: 'dance'
                 }, 
                 {
-                    name:'bird',
+                    type:'bird',
                     className: 'dance'
                 }
             ]

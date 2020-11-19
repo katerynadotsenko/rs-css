@@ -1,8 +1,25 @@
+@keyframes dance {
+    0% {
+        transform: matrix(1, 0, .05, 1, -4, 0);
+    }
+
+    50% {
+        transform: matrix(1, 0, 0, .9, 0, 9);
+    }
+
+    100% {
+        transform: matrix(1, 0, -.05, 1, 4, 0);
+    }
+}
+
+
 .game {
     width: 100%;
     height: 35%;
 
     &__branch {
+        display: flex;
+        align-items: flex-end;
         position: relative;
         width: 100%;
         height: 100%;
@@ -23,18 +40,28 @@
 
 
         &__container {
+            position: absolute;
             display: flex;
             justify-content: center;
             align-items: flex-end;
             width: 100%;
-            height: 100%;
-            bottom: 0;
+            height: 80%;
+            left: 0;
+            bottom: 23%;
         }
 
     }
 }
 
-bird {
+.game .hovered {
+    filter: brightness(130%);
+}
+
+.game .dance {
+    animation: dance .5s infinite alternate;
+}
+
+.game bird {
     position: relative;
     display: inline-block;
     width: 10vw;
@@ -46,8 +73,8 @@ bird {
     &:after {
         content: '';
         position: absolute;
-        bottom: 38%;
         left: 0;
+        bottom: 0;
         display: block;
         width: 100%;
         height: 100%;
@@ -58,7 +85,7 @@ bird {
     }
 }
 
-egg {
+.game egg {
     position: relative;
     display: inline-block;
     width: 5vw;
@@ -89,7 +116,7 @@ egg {
     }
 }
 
-nest {
+.game nest {
     position: relative;
     display: inline-block;
     width: 10vw;

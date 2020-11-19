@@ -43,6 +43,10 @@ h4 {
   line-height: 2.3rem;
 }
 
+.tooltip {
+  position: absolute;
+}
+
 tag {
   font-family: monospace, sans-serif;
   background-color: #2b2b2b;
@@ -50,19 +54,13 @@ tag {
   font-size: 1.3rem;
 }
 
-@keyframes dance {
-  0% {
-    transform: matrix(1, 0, 0.05, 1, -1, 0);
-  }
-  50% {
-    transform: matrix(1, 0, 0, 0.9, 0, 2);
-  }
-  100% {
-    transform: matrix(1, 0, -0.05, 1, 1, 0);
-  }
-}
-.dance {
-  animation: dance 0.5s infinite alternate;
+.tooltip {
+  position: absolute;
+  font-family: monospace, sans-serif;
+  font-size: 1.8rem;
+  color: #3a3938;
+  background-color: #dfdfdf;
+  padding: 10px;
 }
 
 .task {
@@ -74,11 +72,24 @@ tag {
   font-size: 5rem;
 }
 
+@keyframes dance {
+  0% {
+    transform: matrix(1, 0, 0.05, 1, -4, 0);
+  }
+  50% {
+    transform: matrix(1, 0, 0, 0.9, 0, 9);
+  }
+  100% {
+    transform: matrix(1, 0, -0.05, 1, 4, 0);
+  }
+}
 .game {
   width: 100%;
   height: 35%;
 }
 .game__branch {
+  display: flex;
+  align-items: flex-end;
   position: relative;
   width: 100%;
   height: 100%;
@@ -97,15 +108,25 @@ tag {
   background-size: 110%;
 }
 .game__branch__container {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   width: 100%;
-  height: 100%;
-  bottom: 0;
+  height: 80%;
+  left: 0;
+  bottom: 23%;
 }
 
-bird {
+.game .hovered {
+  filter: brightness(130%);
+}
+
+.game .dance {
+  animation: dance 0.5s infinite alternate;
+}
+
+.game bird {
   position: relative;
   display: inline-block;
   width: 10vw;
@@ -113,11 +134,11 @@ bird {
   transform: matrix(1, 0, 0, 1, 0, 0);
   z-index: 1;
 }
-bird:after {
+.game bird:after {
   content: "";
   position: absolute;
-  bottom: 38%;
   left: 0;
+  bottom: 0;
   display: block;
   width: 100%;
   height: 100%;
@@ -127,7 +148,7 @@ bird:after {
   background-size: contain;
 }
 
-egg {
+.game egg {
   position: relative;
   display: inline-block;
   width: 5vw;
@@ -135,7 +156,7 @@ egg {
   transform: matrix(1, 0, 0, 1, 0, 0);
   z-index: 1;
 }
-egg:after {
+.game egg:after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -147,21 +168,21 @@ egg:after {
   background-position: center;
   background-size: contain;
 }
-egg.green:after {
+.game egg.green:after {
   background-image: url("/src/assets/img/egg-green.png");
 }
-egg.pink:after {
+.game egg.pink:after {
   background-image: url("/src/assets/img/egg-pink.png");
 }
 
-nest {
+.game nest {
   position: relative;
   display: inline-block;
   width: 10vw;
   height: 10vw;
   transform: matrix(1, 0, 0, 1, 0, 0);
 }
-nest:after {
+.game nest:after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -174,10 +195,10 @@ nest:after {
   background-position: center;
   background-size: contain;
 }
-nest bird {
+.game nest bird {
   top: -10%;
 }
-nest egg {
+.game nest egg {
   left: 50%;
   transform: matrix(1, 0, 0, 1, 0, 0) translateX(-50%);
 }
@@ -254,6 +275,9 @@ nest egg {
   line-height: 2rem;
   padding: 5px 50px;
 }
+.html-panel__window * {
+  cursor: default;
+}
 .html-panel__line-numbers {
   display: flex;
   justify-content: flex-end;
@@ -265,6 +289,12 @@ nest egg {
   height: 100%;
   border-right: 1px solid #3a3938;
   color: #a0a0a0;
+}
+.html-panel__line-numbers + div * {
+  padding-left: 20px;
+}
+.html-panel__line-numbers + div *:hover {
+  color: #dfdfdf;
 }
 
 .level-panel {
