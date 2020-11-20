@@ -63,7 +63,9 @@ export default class EditorHtmlPanelComponent {
 
         if (childNode.className) {
             const classes = childNode.className.filter(item => item !== 'dance');
-            tagContent += ` class="${classes.join(' ')}"`;
+            if (classes.length) {
+                tagContent += ` class="${classes.join(' ')}"`;
+            }
         }
 
         childElement.innerText = `<${tagContent + closeTag}`;

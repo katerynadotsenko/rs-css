@@ -2,14 +2,17 @@ import TaskComponent from './task.component.js';
 import GameComponent from './game.component.js';
 import EditorComponent from './editor.component.js';
 import LevelPanelComponent from './level-panel.component.js';
+import NavigationComponent from './navigation.component.js';
 import levelsData from '../data/levels.data.js';
 
 export default class App {
     constructor() {
-        this.taskComponent = new TaskComponent(levelsData[1].task);
-        this.gameComponent = new GameComponent(levelsData[1].nodes);
-        this.editorComponent = new EditorComponent(levelsData[1].nodes);
-        this.levelPanelComponent = new LevelPanelComponent(levelsData[1]);
+        this.level = 2;
+        this.taskComponent = new TaskComponent(levelsData[this.level - 1].task);
+        this.gameComponent = new GameComponent(levelsData[this.level - 1].nodes);
+        this.editorComponent = new EditorComponent(levelsData[this.level - 1].nodes);
+        this.levelPanelComponent = new LevelPanelComponent(levelsData[this.level - 1]);
+        this.navigationComponent = new NavigationComponent(this.level, levelsData.length, (level) => this.changeLevel(level));
     }
 
     init() {
@@ -19,6 +22,14 @@ export default class App {
         leftContainer.append(this.taskComponent.render());
         leftContainer.append(this.gameComponent.render());
         leftContainer.append(this.editorComponent.render());
+
+        rightContainer.append(this.navigationComponent.render());
         rightContainer.append(this.levelPanelComponent.render());
+    }
+
+    changeLevel(level) {
+        this.level = level;
+        console.log('app - ', this.level);
+        this.levelPanelComponent.updateLevelDescription(levelsData[this.level - 1]);
     }
 }
