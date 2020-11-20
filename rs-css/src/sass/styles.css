@@ -63,6 +63,30 @@ tag {
   padding: 10px;
 }
 
+.shake {
+  animation: shake 0.2s;
+}
+
+@keyframes shake {
+  0% {
+    left: 5px;
+  }
+  20% {
+    left: -5px;
+  }
+  40% {
+    left: 5px;
+  }
+  60% {
+    left: -5px;
+  }
+  80% {
+    left: 5px;
+  }
+  100% {
+    left: -5px;
+  }
+}
 .task {
   display: flex;
   justify-content: center;
@@ -83,6 +107,11 @@ tag {
     transform: matrix(1, 0, -0.05, 1, 7, 0);
   }
 }
+/*@keyframes fly {
+    100% {
+        top: -50vh;
+    }
+}*/
 .game {
   width: 100%;
   height: 35%;
@@ -126,18 +155,39 @@ tag {
   animation: dance 0.5s infinite alternate;
 }
 
+.game .fly {
+  top: -50vh;
+}
+.game .fly:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -40%;
+  display: block;
+  width: 50%;
+  height: 50%;
+  transform: translateX(-50%);
+  background-image: url("/src/assets/img/rocket-fire-flame.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
 .game bird {
   position: relative;
+  top: 0;
   display: inline-block;
   width: 14vw;
   height: 14vw;
   transform: matrix(1, 0, 0, 1, 0, 0);
+  transition: 1s linear;
   z-index: 1;
 }
 .game bird:after {
   content: "";
   position: absolute;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: 0;
   display: block;
   width: 80%;
@@ -146,6 +196,9 @@ tag {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+}
+.game bird.red:before {
+  transform: translate(-45%, -27%);
 }
 .game bird.red:after {
   width: 100%;
@@ -210,6 +263,9 @@ tag {
 }
 
 .editor {
+  position: relative;
+  top: 0;
+  left: 0;
   font-family: monospace, sans-serif;
   display: flex;
   width: 90%;

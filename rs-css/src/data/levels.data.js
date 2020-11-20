@@ -21,7 +21,8 @@ const levelsData = [
             syntax: 'X',
             hint: 'Selects all elements of type <tag>X</tag>. Type refers to the type of tag, so div, p and ul are all different element types.',
             examples: ['<tag>div</tag> selects all <tag>&lt;div&gt;</tag> elements.', '<tag>p</tag> selects all <tag>&lt;p&gt;</tag> elements.']
-        }
+        },
+        answer: 2
     },
     {
         level: 2,
@@ -47,7 +48,8 @@ const levelsData = [
             syntax: '#id',
             hint: 'Selects the element with a specific <tag>id</tag>. You can also combine the ID selector with the type selector.',
             examples: ['<tag>#cool</tag> selects any element with <tag>id="cool"</tag>', '<tag>ul#long</tag> selects <tag>&lt;ul id="long"&gt;</tag>']
-        }
+        },
+        answer: 1
     }
 ];
 

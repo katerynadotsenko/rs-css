@@ -10,7 +10,7 @@ export default class App {
         this.level = 2;
         this.taskComponent = new TaskComponent(levelsData[this.level - 1].task);
         this.gameComponent = new GameComponent(levelsData[this.level - 1].nodes);
-        this.editorComponent = new EditorComponent(levelsData[this.level - 1].nodes);
+        this.editorComponent = new EditorComponent(levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer);
         this.levelPanelComponent = new LevelPanelComponent(levelsData[this.level - 1]);
         this.navigationComponent = new NavigationComponent(this.level, levelsData.length, (level) => this.changeLevel(level));
     }
@@ -32,6 +32,6 @@ export default class App {
         console.log('app - ', this.level);
         this.levelPanelComponent.updateLevelDescription(levelsData[this.level - 1]);
         this.gameComponent.updateNodes(levelsData[this.level - 1].nodes);
-        this.editorComponent.updateEditorComponents(levelsData[this.level - 1].nodes);
+        this.editorComponent.updateEditorComponents(levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer);
     }
 }

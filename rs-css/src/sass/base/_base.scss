@@ -62,3 +62,33 @@ tag {
     background-color: $color-light-2;
     padding: 10px;
 }
+
+.shake {
+    animation: shake .2s;
+}
+
+@keyframes shake {
+    0% {
+        left: 5px;
+    }
+
+    20% {
+        left: -5px;
+    }
+
+    40% {
+        left: 5px;
+    }
+
+    60% {
+        left: -5px;
+    }
+
+    80% {
+        left: 5px;
+    }
+
+    100% {
+        left: -5px;
+    }
+}

@@ -12,6 +12,11 @@
     }
 }
 
+/*@keyframes fly {
+    100% {
+        top: -50vh;
+    }
+}*/
 
 .game {
     width: 100%;
@@ -61,19 +66,43 @@
     animation: dance .5s infinite alternate;
 }
 
+.game .fly {
+    top: -50vh;
+
+    &:before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -40%;
+        display: block;
+        width: 50%;
+        height: 50%;
+        transform: translateX(-50%);
+        background-image: url('/src/assets/img/rocket-fire-flame.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+    }
+
+}
+
 .game bird {
     position: relative;
+    top: 0;
     display: inline-block;
     width: 14vw;
     height: 14vw;
     transform: matrix(1, 0, 0, 1, 0, 0);
+    transition: 1s linear;
     z-index: 1;
 
 
     &:after {
         content: '';
         position: absolute;
-        left: 0;
+        left: 50%;
+        transform: translateX(-50%);
         bottom: 0;
         display: block;
         width: 80%;
@@ -82,6 +111,11 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
+    }
+
+
+    &.red:before {
+        transform: translate(-45%, -27%);
     }
 
     &.red:after {

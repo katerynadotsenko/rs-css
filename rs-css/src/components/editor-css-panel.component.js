@@ -1,6 +1,6 @@
 export default class EditorCssPanelComponent {
-    constructor() {
-
+    constructor(answer) {
+        this.answer = answer;
     }
 
     render() {
@@ -19,11 +19,68 @@ export default class EditorCssPanelComponent {
         editorCssButton.classList.add('css-panel__button');
         editorCssButton.innerText = 'enter';
 
+        editorCssButton.addEventListener('click', this.checkSelector.bind(this));
+
         editorCssWindow.append(editorCssButton);
 
         editorCssPanel.append(editorCssWindow);
 
         return editorCssPanel;
 
+    }
+
+    updateCss(answer) {
+        this.answer = answer;
+    }
+
+    checkSelector() {
+        const cssPanelInput = document.querySelector('.css-panel__input');
+        const selectorResult = document.querySelector('.game__branch__container').querySelectorAll(cssPanelInput.value);
+
+        if (selectorResult.length == 0) {
+
+            const editor = document.querySelector('.editor');
+            editor.classList.add('shake');
+            setTimeout(() => {
+                editor.classList.remove('shake');
+            }, 520);
+
+        } else {
+
+            const selectorResultWithDance = [...selectorResult].filter(node => node.classList.contains('dance'));
+
+            if (selectorResultWithDance.length == this.answer && selectorResult.length == this.answer) {
+
+                [...selectorResult].forEach(item => {
+                    item.classList.remove('dance');
+                    item.classList.add('fly');
+                    //item.style.animation = 'fly 4s linear infinite';
+                });
+                
+                console.log("answer is true");
+
+            } else {
+
+                [...selectorResult].forEach(item => {
+                    const isDance = item.classList.contains('dance');
+
+                    if (isDance) {
+                        item.classList.remove('dance');
+                    }
+
+                    item.classList.add('shake');
+                    setTimeout(() => {
+                        item.classList.remove('shake');
+
+                        if (isDance) {
+                            item.classList.add('dance');
+                        }
+
+                    }, 520);
+                })
+
+            }
+
+        }
     }
 }
