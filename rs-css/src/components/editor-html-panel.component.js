@@ -16,6 +16,7 @@ export default class EditorHtmlPanelComponent {
         editorHtmlPanel.innerHTML = `<div class="html-panel__header"><span>HTML Viewer</span><span>branch.html</span></div>`;
 
         const branchTag = document.createElement('div');
+        branchTag.classList.add('html-branch');
         branchTag.appendChild(document.createTextNode('<div class="branch">'));
 
         this.generateHtml(branchTag, this.nodes[1]);
@@ -26,6 +27,17 @@ export default class EditorHtmlPanelComponent {
         editorHtmlPanel.append(editorHtmlWindow);
 
         return editorHtmlPanel;
+    }
+
+    updateHtml(nodes) {
+        this.nodes = nodes;
+        const branchTag = document.querySelector('.html-branch');
+
+        branchTag.innerHTML = '';
+        branchTag.appendChild(document.createTextNode('<div class="branch">'));
+
+        this.generateHtml(branchTag, this.nodes[1]);
+        branchTag.appendChild(document.createTextNode('</div>'));
     }
 
     generateHtml(parentNode, childNode) {

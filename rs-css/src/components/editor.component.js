@@ -17,4 +17,8 @@ export default class EditorComponent {
 
         return editor;
     }
+
+    updateEditorComponents(nodes) {
+        this.editorHtmlPanelComponent.updateHtml(nodes);
+    }
 }
