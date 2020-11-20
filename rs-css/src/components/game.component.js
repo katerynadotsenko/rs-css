@@ -56,7 +56,7 @@ export default class GameComponent {
         const childElement = document.createElement(`${childNode.type}`);
 
         if (childNode.className) {
-            childElement.classList.add(`${childNode.className}`);
+            childElement.classList.add(...childNode.className);
         }
 
         parentNode.append(childElement);

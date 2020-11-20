@@ -58,12 +58,15 @@ export default class EditorHtmlPanelComponent {
     appendChildElement(parentNode, childNode, nodePosition, isCloseTag=true) {
         const childElement = document.createElement('div');
 
+        let tagContent =  childNode.type;
         const closeTag = isCloseTag ? ` />` : '>';
-        childElement.innerText = `<${childNode.type + closeTag}`;
 
-        if (childNode.className && childNode.className !== 'dance') {
-            childElement.classList.add(`${childNode.className}`);
+        if (childNode.className) {
+            const classes = childNode.className.filter(item => item !== 'dance');
+            tagContent += ` class="${classes.join(' ')}"`;
         }
+
+        childElement.innerText = `<${tagContent + closeTag}`;
 
         this.bindListeners(childElement, childNode, nodePosition);
 
@@ -74,7 +77,7 @@ export default class EditorHtmlPanelComponent {
 
     bindListeners(element, node, nodePosition) {
         element.addEventListener('mouseover', () => {
-            const elementInGame = document.querySelectorAll(`${node.type}`)[nodePosition];
+            const elementInGame = document.querySelectorAll('.game__branch__container *')[nodePosition];
             elementInGame.classList.add('hovered');
 
             tooltipShow(elementInGame, node);
@@ -83,7 +86,7 @@ export default class EditorHtmlPanelComponent {
         });
 
         element.addEventListener('mouseout', () => {
-            const elementInGame = document.querySelectorAll(`${node.type}`)[nodePosition];
+            const elementInGame = document.querySelectorAll('.game__branch__container *')[nodePosition];
             elementInGame.classList.remove('hovered');
 
             tooltipHide();

@@ -6,10 +6,10 @@ import levelsData from '../data/levels.data.js';
 
 export default class App {
     constructor() {
-        this.taskComponent = new TaskComponent(levelsData[0].task);
-        this.gameComponent = new GameComponent(levelsData[0].nodes);
-        this.editorComponent = new EditorComponent(levelsData[0].nodes);
-        this.levelPanelComponent = new LevelPanelComponent(levelsData[0]);
+        this.taskComponent = new TaskComponent(levelsData[1].task);
+        this.gameComponent = new GameComponent(levelsData[1].nodes);
+        this.editorComponent = new EditorComponent(levelsData[1].nodes);
+        this.levelPanelComponent = new LevelPanelComponent(levelsData[1]);
     }
 
     init() {

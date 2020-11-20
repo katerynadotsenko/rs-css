@@ -3,7 +3,15 @@ function tooltipShow(element, node) {
 
     const tooltip = document.createElement('div');
     tooltip.classList.add('tooltip');
-    tooltip.innerText = `<${node.type}></${node.type}>`;
+
+    let classesContent = '';
+
+    if (node.className) {
+        const classes = node.className.filter(item => item !== 'dance');
+        classesContent += ` class="${classes.join(' ')}"`;
+    }
+
+    tooltip.innerText = `<${node.type + classesContent}></${node.type}>`;
 
     const tooltipTop = `${element.offsetTop - element.offsetHeight / 4}px`;
     const tooltipLeft = `${element.offsetLeft}px`;
