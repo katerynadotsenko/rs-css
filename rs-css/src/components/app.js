@@ -31,5 +31,6 @@ export default class App {
         this.level = level;
         console.log('app - ', this.level);
         this.levelPanelComponent.updateLevelDescription(levelsData[this.level - 1]);
+        this.gameComponent.updateNodes(levelsData[this.level - 1].nodes);
     }
 }

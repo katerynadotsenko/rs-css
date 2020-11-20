@@ -21,7 +21,7 @@ export default class GameComponent {
 
         branch.append(branchContainer);
 
-        this.generateNodes(branchContainer, this.nodes[1])
+        this.generateNodes(branchContainer, this.nodes[1]);
 
         return branch;
         
@@ -62,5 +62,14 @@ export default class GameComponent {
         parentNode.append(childElement);
 
         return childElement;
+    }
+
+    updateNodes(nodes) {
+        this.nodes = nodes;
+        const branchContainer = document.querySelector('.game__branch__container');
+        while(branchContainer.hasChildNodes()) {
+            branchContainer.removeChild(branchContainer.firstChild);
+        }
+        this.generateNodes(branchContainer, this.nodes[1]);
     }
 }
