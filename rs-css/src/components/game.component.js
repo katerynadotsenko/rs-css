@@ -41,7 +41,7 @@ export default class GameComponent {
 
                 if (Array.isArray(node)) {
 
-                    const childElement = this.appendChildElement(parentNode, node[0]);
+                    const childElement = this.appendChildElement(parentNode, node[0], nodePosition);
                     this.generateNodes(childElement, node[1]);
 
                 } else {
@@ -61,25 +61,47 @@ export default class GameComponent {
             childElement.classList.add(...childNode.className);
         }
 
-        this.bindListeners(childElement, childNode, nodePosition)
+        this.bindListeners(childElement, parentNode, childNode, nodePosition);
 
         parentNode.append(childElement);
 
         return childElement;
     }
 
-    bindListeners(element, node, nodePosition) {
-        element.addEventListener('mouseover', () => {
-            const elementInHtml = document.querySelectorAll('.html-branch *')[nodePosition];
-            elementInHtml.classList.add('hover');
+    bindListeners(element, parentNode, childNode, nodePosition) {
 
-            tooltipShow(element, node);
+        element.addEventListener('mouseover', (e) => {
+
+            e.stopPropagation();
+
+            let elementInHtml;
+
+            if (parentNode.tagName.toLowerCase() === 'div') {
+                elementInHtml = document.evaluate(`//div[@class='html-branch']//div`, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null );
+            } else {
+                elementInHtml = document.evaluate(`//div[@class='html-branch']//div[contains(text(), '${parentNode.tagName.toLowerCase()}')]//div`, 
+                                    document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null );
+            }
+
+            elementInHtml.snapshotItem(nodePosition).classList.add('hovered');
+            element.classList.add('hovered');
+
+            tooltipShow(element, childNode);
 
         });
 
         element.addEventListener('mouseout', () => {
-            const elementInHtml = document.querySelectorAll('.html-branch *')[nodePosition];
-            elementInHtml.classList.remove('hover');
+            let elementInHtml;
+
+            if (parentNode.tagName.toLowerCase() === 'div') {
+                elementInHtml = document.evaluate(`//div[@class='html-branch']//div`, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null );
+            } else {
+                elementInHtml = document.evaluate(`//div[@class='html-branch']//div[contains(text(), '${parentNode.tagName.toLowerCase()}')]//div`, 
+                                    document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null );
+            }
+
+            elementInHtml.snapshotItem(nodePosition).classList.remove('hovered');
+            element.classList.remove('hovered');
 
             tooltipHide();
 

@@ -12,12 +12,6 @@
     }
 }
 
-/*@keyframes fly {
-    100% {
-        top: -50vh;
-    }
-}*/
-
 .game {
     width: 100%;
     height: 35%;
@@ -67,7 +61,7 @@
 }
 
 .game .fly {
-    top: -50vh;
+    top: -50vh !important;
 
     &:before {
         content: "";
@@ -91,26 +85,19 @@
     position: relative;
     top: 0;
     display: inline-block;
-    width: 14vw;
-    height: 14vw;
+    width: 10vw;
+    height: 10vw;
     transform: matrix(1, 0, 0, 1, 0, 0);
     transition: top 1s linear;
     z-index: 1;
 
-    &:hover {
-        filter: brightness(130%);
-    }
-
-
     &:after {
         content: '';
         position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
         bottom: 0;
         display: block;
-        width: 80%;
-        height: 80%;
+        width: 100%;
+        height: 100%;
         background-image: url('/src/assets/img/bird.png');
         background-repeat: no-repeat;
         background-position: center;
@@ -118,30 +105,31 @@
     }
 
 
-    &.red:before {
-        transform: translate(-45%, -27%);
-    }
+    &.red {
+        width: 14vw;
+        height: 14vw;
 
-    &.red:after {
-        width: 100%;
-        height: 100%;
-        bottom: 5%;
-        background-image: url('/src/assets/img/bird-red.png');
+        &:before {
+            transform: translate(-45%, -27%);
+        }
+
+        &:after {
+            width: 100%;
+            height: 100%;
+            bottom: 5%;
+            background-image: url('/src/assets/img/bird-red.png');
+        }
     }
 }
 
 .game egg {
     position: relative;
-    display: inline-block;
+    display: block;
     width: 5vw;
     height: 5vw;
     transform: matrix(1, 0, 0, 1, 0, 0);
+    transition: top 1s linear;
     z-index: 1;
-
-    &:hover {
-        filter: brightness(130%);
-    }
-
 
     &:after {
         content: '';
@@ -154,6 +142,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
+        background-image: url('/src/assets/img/egg-pink.png');
     }
 
     &.green:after {
@@ -167,15 +156,10 @@
 
 .game nest {
     position: relative;
-    display: inline-block;
     width: 10vw;
-    height: 10vw;
+    min-height: 10vh;
     transform: matrix(1, 0, 0, 1, 0, 0);
-
-    &:hover {
-        filter: brightness(130%);
-    }
-
+    transition: top .5s linear;
 
     &:after {
         content: '';
@@ -196,7 +180,20 @@
     }
 
     & egg {
-        left: 50%;
-        transform: matrix(1, 0, 0, 1, 0, 0) translateX(-50%);
+        position: absolute;
+        top: -20%;
+        left: 23%;
+
+        &:nth-last-child(1) {
+            top: -20%;
+        }
+
+        &:nth-last-child(2) {
+            top: -100%;
+        }
+    }
+
+    & *:first-child {
+        z-index: 2;
     }
 }

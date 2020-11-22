@@ -48,6 +48,44 @@ const levelsData = [
             examples: ['<tag>.neato</tag> selects all elements with <tag>class="neato"</tag>']
         },
         answer: 1
+    },
+    {
+        level: 3,
+        nodes: ['branch', 
+            [
+                {
+                    type:'bird',
+                    className: ['red']
+                }, 
+                {
+                    type:'nest'
+                },
+                [
+                    {
+                        type:'nest'
+                    },
+                    [
+                        {
+                            type:'egg',
+                            className: ['dance']
+                        },
+                        {
+                            type:'egg'
+                        }
+                    ]
+                ]
+            ]
+        ],
+        task: 'Select the top egg',
+        description: {
+            selectorName: 'First Child Pseudo-selector',
+            title: 'Select a first child element inside of another element',
+            syntax: ':first-child',
+            hint: 'You can select the first child element. A child element is any element that is directly nested in another element. You can combine this pseudo-selector with other selectors.',
+            examples: ['<tag>:first-child</tag> selects all first child elements.', '<tag>p:first-child</tag> selects all first child <tag>&lt;p&gt;</tag> elements.',
+                        '<tag>div p:first-child</tag> selects all first child <tag>&lt;p&gt;</tag> elements that are in a <tag>&lt;div&gt;</tag>']
+        },
+        answer: 1
     }
 ];
 

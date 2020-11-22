@@ -24,7 +24,9 @@ function tooltipShow(element, node) {
 
 function tooltipHide() {
     const tooltip = document.querySelector('.tooltip');
-    tooltip.remove();
+    if (tooltip) {
+        tooltip.remove();
+    }
 }
 
 export {tooltipShow, tooltipHide};

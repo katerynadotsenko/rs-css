@@ -61,6 +61,7 @@ tag {
   color: #3a3938;
   background-color: #dfdfdf;
   padding: 10px;
+  z-index: 10;
 }
 
 .shake {
@@ -69,22 +70,22 @@ tag {
 
 @keyframes shake {
   0% {
-    left: 5px;
+    transform: translateX(5px);
   }
   20% {
-    left: -5px;
+    transform: translateX(-5px);
   }
   40% {
-    left: 5px;
+    transform: translateX(5px);
   }
   60% {
-    left: -5px;
+    transform: translateX(-5px);
   }
   80% {
-    left: 5px;
+    transform: translateX(5px);
   }
   100% {
-    left: -5px;
+    transform: translateX(-5px);
   }
 }
 .task {
@@ -107,11 +108,6 @@ tag {
     transform: matrix(1, 0, -0.05, 1, 7, 0);
   }
 }
-/*@keyframes fly {
-    100% {
-        top: -50vh;
-    }
-}*/
 .game {
   width: 100%;
   height: 35%;
@@ -156,7 +152,7 @@ tag {
 }
 
 .game .fly {
-  top: -50vh;
+  top: -50vh !important;
 }
 .game .fly:before {
   content: "";
@@ -177,28 +173,27 @@ tag {
   position: relative;
   top: 0;
   display: inline-block;
-  width: 14vw;
-  height: 14vw;
+  width: 10vw;
+  height: 10vw;
   transform: matrix(1, 0, 0, 1, 0, 0);
   transition: top 1s linear;
   z-index: 1;
 }
-.game bird:hover {
-  filter: brightness(130%);
-}
 .game bird:after {
   content: "";
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   bottom: 0;
   display: block;
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   background-image: url("/src/assets/img/bird.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+}
+.game bird.red {
+  width: 14vw;
+  height: 14vw;
 }
 .game bird.red:before {
   transform: translate(-45%, -27%);
@@ -212,14 +207,12 @@ tag {
 
 .game egg {
   position: relative;
-  display: inline-block;
+  display: block;
   width: 5vw;
   height: 5vw;
   transform: matrix(1, 0, 0, 1, 0, 0);
+  transition: top 1s linear;
   z-index: 1;
-}
-.game egg:hover {
-  filter: brightness(130%);
 }
 .game egg:after {
   content: "";
@@ -232,6 +225,7 @@ tag {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  background-image: url("/src/assets/img/egg-pink.png");
 }
 .game egg.green:after {
   background-image: url("/src/assets/img/egg-green.png");
@@ -242,13 +236,10 @@ tag {
 
 .game nest {
   position: relative;
-  display: inline-block;
   width: 10vw;
-  height: 10vw;
+  min-height: 10vh;
   transform: matrix(1, 0, 0, 1, 0, 0);
-}
-.game nest:hover {
-  filter: brightness(130%);
+  transition: top 0.5s linear;
 }
 .game nest:after {
   content: "";
@@ -267,8 +258,18 @@ tag {
   top: -10%;
 }
 .game nest egg {
-  left: 50%;
-  transform: matrix(1, 0, 0, 1, 0, 0) translateX(-50%);
+  position: absolute;
+  top: -20%;
+  left: 23%;
+}
+.game nest egg:nth-last-child(1) {
+  top: -20%;
+}
+.game nest egg:nth-last-child(2) {
+  top: -100%;
+}
+.game nest *:first-child {
+  z-index: 2;
 }
 
 .editor {
@@ -364,7 +365,7 @@ tag {
 .html-panel__line-numbers + div * {
   padding-left: 20px;
 }
-.html-panel__line-numbers + div *:hover, .html-panel__line-numbers + div *.hover {
+.html-panel__line-numbers + div *.hovered {
   color: #dfdfdf;
 }
 

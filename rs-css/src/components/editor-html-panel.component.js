@@ -56,7 +56,7 @@ export default class EditorHtmlPanelComponent {
                     const childElement = this.appendChildElement(parentNode, node[0], nodePosition, isCloseTag);
                     this.generateHtml(childElement, node[1]);
 
-                    childElement.appendChild(document.createTextNode(`</${childNode[0].type}>`));
+                    childElement.appendChild(document.createTextNode(`</${node[0].type}>`));
                 
                 } else {
 
@@ -90,18 +90,21 @@ export default class EditorHtmlPanelComponent {
     }
 
     bindListeners(element, node, nodePosition) {
-        element.addEventListener('mouseover', () => {
+        element.addEventListener('mouseover', (e) => {
+            e.stopPropagation();
             const elementInGame = document.querySelectorAll('.game__branch__container *')[nodePosition];
             elementInGame.classList.add('hovered');
+            element.classList.add('hovered');
 
             tooltipShow(elementInGame, node);
             //console.log('mouseover');
             //console.log(elementInGame);
         });
 
-        element.addEventListener('mouseout', () => {
+        element.addEventListener('mouseout', (e) => {
             const elementInGame = document.querySelectorAll('.game__branch__container *')[nodePosition];
             elementInGame.classList.remove('hovered');
+            element.classList.remove('hovered');
 
             tooltipHide();
             //console.log('mouseout');
