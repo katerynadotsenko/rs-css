@@ -180,8 +180,11 @@ tag {
   width: 14vw;
   height: 14vw;
   transform: matrix(1, 0, 0, 1, 0, 0);
-  transition: 1s linear;
+  transition: top 1s linear;
   z-index: 1;
+}
+.game bird:hover {
+  filter: brightness(130%);
 }
 .game bird:after {
   content: "";
@@ -215,6 +218,9 @@ tag {
   transform: matrix(1, 0, 0, 1, 0, 0);
   z-index: 1;
 }
+.game egg:hover {
+  filter: brightness(130%);
+}
 .game egg:after {
   content: "";
   position: absolute;
@@ -240,6 +246,9 @@ tag {
   width: 10vw;
   height: 10vw;
   transform: matrix(1, 0, 0, 1, 0, 0);
+}
+.game nest:hover {
+  filter: brightness(130%);
 }
 .game nest:after {
   content: "";
@@ -355,7 +364,7 @@ tag {
 .html-panel__line-numbers + div * {
   padding-left: 20px;
 }
-.html-panel__line-numbers + div *:hover {
+.html-panel__line-numbers + div *:hover, .html-panel__line-numbers + div *.hover {
   color: #dfdfdf;
 }
 

@@ -1,3 +1,5 @@
+import {tooltipShow, tooltipHide} from '../helpers/utils.js';
+
 export default class GameComponent {
     constructor(nodes) {
         this.nodes = nodes;
@@ -35,7 +37,7 @@ export default class GameComponent {
 
         } else {
 
-            childNode.forEach(node => {
+            childNode.forEach((node, nodePosition) => {
 
                 if (Array.isArray(node)) {
 
@@ -44,7 +46,7 @@ export default class GameComponent {
 
                 } else {
 
-                    this.appendChildElement(parentNode, node);
+                    this.appendChildElement(parentNode, node, nodePosition);
 
                 }
 
@@ -52,16 +54,36 @@ export default class GameComponent {
         }
     }
 
-    appendChildElement(parentNode, childNode) {
+    appendChildElement(parentNode, childNode, nodePosition) {
         const childElement = document.createElement(`${childNode.type}`);
 
         if (childNode.className) {
             childElement.classList.add(...childNode.className);
         }
 
+        this.bindListeners(childElement, childNode, nodePosition)
+
         parentNode.append(childElement);
 
         return childElement;
+    }
+
+    bindListeners(element, node, nodePosition) {
+        element.addEventListener('mouseover', () => {
+            const elementInHtml = document.querySelectorAll('.html-branch *')[nodePosition];
+            elementInHtml.classList.add('hover');
+
+            tooltipShow(element, node);
+
+        });
+
+        element.addEventListener('mouseout', () => {
+            const elementInHtml = document.querySelectorAll('.html-branch *')[nodePosition];
+            elementInHtml.classList.remove('hover');
+
+            tooltipHide();
+
+        });
     }
 
     updateNodes(nodes) {

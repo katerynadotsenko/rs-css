@@ -94,8 +94,12 @@
     width: 14vw;
     height: 14vw;
     transform: matrix(1, 0, 0, 1, 0, 0);
-    transition: 1s linear;
+    transition: top 1s linear;
     z-index: 1;
+
+    &:hover {
+        filter: brightness(130%);
+    }
 
 
     &:after {
@@ -134,6 +138,10 @@
     transform: matrix(1, 0, 0, 1, 0, 0);
     z-index: 1;
 
+    &:hover {
+        filter: brightness(130%);
+    }
+
 
     &:after {
         content: '';
@@ -163,6 +171,10 @@
     width: 10vw;
     height: 10vw;
     transform: matrix(1, 0, 0, 1, 0, 0);
+
+    &:hover {
+        filter: brightness(130%);
+    }
 
 
     &:after {

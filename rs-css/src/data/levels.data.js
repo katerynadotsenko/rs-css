@@ -13,7 +13,6 @@ const levelsData = [
                 }
             ]
         ],
-        selector: ['bird'],
         task: 'Select the birds',
         description: {
             selectorName: 'Type Selector',
@@ -40,7 +39,6 @@ const levelsData = [
                 }
             ]
         ],
-        selector: ['bird'],
         task: 'Select the red bird',
         description: {
             selectorName: 'ID Selector',

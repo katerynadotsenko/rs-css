@@ -98,7 +98,8 @@
         &+div * {
             padding-left: 20px;
 
-            &:hover {
+            &:hover,
+            &.hover {
                 color: $color-light-2;
             }
         }
