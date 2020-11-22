@@ -41,11 +41,11 @@ const levelsData = [
         ],
         task: 'Select the red bird',
         description: {
-            selectorName: 'ID Selector',
-            title: 'Select elements with an ID',
-            syntax: '#id',
-            hint: 'Selects the element with a specific <tag>id</tag>. You can also combine the ID selector with the type selector.',
-            examples: ['<tag>#cool</tag> selects any element with <tag>id="cool"</tag>', '<tag>ul#long</tag> selects <tag>&lt;ul id="long"&gt;</tag>']
+            selectorName: 'Class Selector',
+            title: 'Select elements by their class',
+            syntax: '.classname',
+            hint: 'The class selector selects all elements with that class attribute. Elements can only have one ID, but many classes.',
+            examples: ['<tag>.neato</tag> selects all elements with <tag>class="neato"</tag>']
         },
         answer: 1
     }
