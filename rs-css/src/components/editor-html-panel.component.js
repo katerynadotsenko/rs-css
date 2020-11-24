@@ -96,9 +96,10 @@ export default class EditorHtmlPanelComponent {
             let elementInGame;
 
             if (parentNode.classList.contains('html-branch')) {
-                elementInGame = document.querySelectorAll('.game__branch__container *')[nodePosition];
+                elementInGame = document.querySelectorAll('.game__branch__container > *')[nodePosition];
             } else {
-                elementInGame = document.querySelectorAll(`.game__branch__container ${childNode.type}`)[nodePosition];
+                let indexOfParentNode = Array.from(parentNode.parentNode.children).indexOf(parentNode);
+                elementInGame = document.querySelectorAll(`.game__branch__container > *`)[indexOfParentNode].childNodes[nodePosition];
             }
             
             elementInGame.classList.add('hovered');
@@ -112,10 +113,12 @@ export default class EditorHtmlPanelComponent {
             let elementInGame;
 
             if (parentNode.classList.contains('html-branch')) {
-                elementInGame = document.querySelectorAll('.game__branch__container *')[nodePosition];
+                elementInGame = document.querySelectorAll('.game__branch__container > *')[nodePosition];
             } else {
-                elementInGame = document.querySelectorAll(`.game__branch__container ${childNode.type}`)[nodePosition];
+                let indexOfParentNode = Array.from(parentNode.parentNode.children).indexOf(parentNode);
+                elementInGame = document.querySelectorAll(`.game__branch__container > *`)[indexOfParentNode].childNodes[nodePosition];
             }
+            
             elementInGame.classList.remove('hovered');
             element.classList.remove('hovered');
 
