@@ -1,0 +1,87 @@
+.navigation {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 15px;
+
+    &__top {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__level {
+        flex-grow: 6;
+    }
+
+    &__arrows {
+        flex-grow: 2;
+    }
+
+    &__arrow {
+        background-color: transparent;
+        color: $color-light;
+        border: none;
+        outline-style: none;
+        transition: .2s linear;
+        cursor: pointer;
+
+        &:hover {
+            color: $color-light-2;
+        }
+    }
+
+    &__menu-toggle {
+        position: relative;
+        width: 28px;
+        height: 20px;
+        cursor: pointer;
+
+        &:hover span,
+        &:hover:before,
+        &:hover:after {
+            background-color: $color-light-2;
+        }
+
+        &:before {
+            content: '';
+            top: 0;
+
+        }
+
+        &:after {
+            content: '';
+            bottom: 0;
+        }
+
+        & span {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        & span,
+        &:before,
+        &:after {
+            position: absolute;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: $color-light;
+            transition: .2s linear;
+        }
+    }
+
+    &__choose-level-button {
+        background-color: $color-dark;
+        color: $color-light;
+        border: none;
+        outline-style: none;
+        padding: 5px;
+        transition: .2s linear;
+        border-radius: 3px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $color-primary;
+        }
+    }
+}

@@ -7,7 +7,7 @@ import levelsData from '../data/levels.data.js';
 
 export default class App {
     constructor() {
-        this.level = 3;
+        this.level = 1;
         this.taskComponent = new TaskComponent(levelsData[this.level - 1].task);
         this.gameComponent = new GameComponent(levelsData[this.level - 1].nodes);
         this.editorComponent = new EditorComponent(levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer);
