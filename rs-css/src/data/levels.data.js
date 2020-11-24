@@ -10,6 +10,10 @@ const levelsData = [
                 {
                     type:'bird',
                     className: ['dance']
+                }, 
+                {
+                    type:'bird',
+                    className: ['dance']
                 }
             ]
         ],
@@ -21,7 +25,7 @@ const levelsData = [
             hint: 'Selects all elements of type <tag>X</tag>. Type refers to the type of tag, so div, p and ul are all different element types.',
             examples: ['<tag>div</tag> selects all <tag>&lt;div&gt;</tag> elements.', '<tag>p</tag> selects all <tag>&lt;p&gt;</tag> elements.']
         },
-        answer: 2
+        answer: 3
     },
     {
         level: 2,
@@ -55,7 +59,7 @@ const levelsData = [
             [
                 {
                     type:'bird',
-                    className: ['red']
+                    className: ['blue']
                 }, 
                 {
                     type:'nest'
@@ -86,6 +90,104 @@ const levelsData = [
                         '<tag>div p:first-child</tag> selects all first child <tag>&lt;p&gt;</tag> elements that are in a <tag>&lt;div&gt;</tag>']
         },
         answer: 1
+    },
+    {
+        level: 4,
+        nodes: ['branch', 
+            [
+                {
+                    type:'egg',
+                    className: ['pink']
+                }, 
+                {
+                    type:'egg',
+                    className: ['green']
+                }, 
+                {
+                    type:'egg',
+                    className: ['red']
+                }, 
+                {
+                    type:'egg',
+                    className: ['yellow']
+                }, 
+                {
+                    type:'egg',
+                    className: ['dance', 'green']
+                }, 
+                {
+                    type:'egg',
+                    className: [ 'purple']
+                }
+            ]
+        ],
+        task: 'Select the 5rd egg',
+        description: {
+            selectorName: 'Nth Child Pseudo-selector',
+            title: 'Select an element by its order in another element',
+            syntax: ':nth-child(A)',
+            hint: 'Selects the <tag>nth</tag> (Ex: 1st, 3rd, 12th etc.) child element in another element.',
+            examples: ['<tag>:nth-child(8)</tag> selects every element that is the 8th child of another element.',
+                        '<tag>div p:nth-child(2)</tag> selects the second <tag>p</tag> in every <tag>div</tag>']
+        },
+        answer: 1
+    }
+    ,
+    {
+        level: 5,
+        nodes: ['branch', 
+            [
+                [
+                    {
+                        type:'nest'
+                    },
+                    [
+                        {
+                            type:'egg'
+                        },
+                        {
+                            type:'egg'
+                        }
+                    ]
+                ], 
+                [
+                    {
+                        type:'nest'
+                    },
+                    [
+                        {
+                            type:'bird',
+                            className: ['dance']
+                        }
+                    ]
+                ],
+                [
+                    {
+                        type:'nest'
+                    },
+                    [
+                        {
+                            type:'egg',
+                            className: ['dance', 'purple']
+                        }
+                    ]
+                ],
+                {
+                    type:'bird',
+                    className: ['red']
+                }
+            ]
+        ],
+        task: 'Select the bird and the purple egg in the nest',
+        description: {
+            selectorName: 'Only Child Pseudo-selector',
+            title: 'Select an element that are the only element inside of another one.',
+            syntax: ':only-child',
+            hint: 'You can select any element that is the only element inside of another one.',
+            examples: ['<tag>span:only-child</tag> selects the <tag>&lt;span&gt;</tag> elements that are the only child of some other element.',
+                        '<tag>ul li:only-child</tag> selects the only <tag>&lt;li&gt;</tag> element that are in a <tag>&lt;ul&gt;</tag>.']
+        },
+        answer: 2
     }
 ];
 
