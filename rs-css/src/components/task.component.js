@@ -10,4 +10,11 @@ export default class TaskComponent {
 
         return task;
     }
+
+    updateTask(task) {
+        this.task = task;
+
+        const taskElement = document.querySelector('.task');
+        taskElement.innerText = `${this.task}`;
+    }
 }
