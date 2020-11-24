@@ -1,6 +1,4 @@
 function tooltipShow(element, node) {
-    const gameBranchContainer = document.querySelector('.game__branch__container');
-
     const tooltip = document.createElement('div');
     tooltip.classList.add('tooltip');
 
@@ -8,18 +6,20 @@ function tooltipShow(element, node) {
 
     if (node.className) {
         const classes = node.className.filter(item => item !== 'dance');
-        classesContent += ` class="${classes.join(' ')}"`;
+        classesContent += classes.length ? ` class="${classes.join(' ')}"` : '';
     }
 
     tooltip.innerText = `<${node.type + classesContent}></${node.type}>`;
 
-    const tooltipTop = `${element.offsetTop - element.offsetHeight / 4}px`;
-    const tooltipLeft = `${element.offsetLeft}px`;
+    const coords = element.getBoundingClientRect();
+
+    const tooltipTop = `${coords.top - coords.height * 0.2}px`;
+    const tooltipLeft = `${coords.left}px`;
     
     tooltip.style.top = tooltipTop;
     tooltip.style.left = tooltipLeft;
 
-    gameBranchContainer.append(tooltip);
+    document.body.append(tooltip);
 }
 
 function tooltipHide() {

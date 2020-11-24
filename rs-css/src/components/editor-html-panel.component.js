@@ -82,33 +82,45 @@ export default class EditorHtmlPanelComponent {
 
         childElement.innerText = `<${tagContent + closeTag}`;
 
-        this.bindListeners(childElement, childNode, nodePosition);
+        this.bindListeners(childElement, parentNode, childNode, nodePosition);
 
         parentNode.append(childElement);
 
         return childElement;
     }
 
-    bindListeners(element, node, nodePosition) {
+    bindListeners(element, parentNode, childNode, nodePosition) {
+        
         element.addEventListener('mouseover', (e) => {
             e.stopPropagation();
-            const elementInGame = document.querySelectorAll('.game__branch__container *')[nodePosition];
+            let elementInGame;
+
+            if (parentNode.classList.contains('html-branch')) {
+                elementInGame = document.querySelectorAll('.game__branch__container *')[nodePosition];
+            } else {
+                elementInGame = document.querySelectorAll(`.game__branch__container ${childNode.type}`)[nodePosition];
+            }
+            
             elementInGame.classList.add('hovered');
             element.classList.add('hovered');
 
-            tooltipShow(elementInGame, node);
-            //console.log('mouseover');
-            //console.log(elementInGame);
+            tooltipShow(elementInGame, childNode);
+
         });
 
         element.addEventListener('mouseout', (e) => {
-            const elementInGame = document.querySelectorAll('.game__branch__container *')[nodePosition];
+            let elementInGame;
+
+            if (parentNode.classList.contains('html-branch')) {
+                elementInGame = document.querySelectorAll('.game__branch__container *')[nodePosition];
+            } else {
+                elementInGame = document.querySelectorAll(`.game__branch__container ${childNode.type}`)[nodePosition];
+            }
             elementInGame.classList.remove('hovered');
             element.classList.remove('hovered');
 
             tooltipHide();
-            //console.log('mouseout');
-            //console.log(elementInGame);
+
         });
     }
 }

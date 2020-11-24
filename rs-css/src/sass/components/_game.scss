@@ -52,7 +52,7 @@
     }
 }
 
-.game .hovered {
+.game .hovered:after {
     filter: brightness(130%);
 }
 
