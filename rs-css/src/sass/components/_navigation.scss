@@ -85,3 +85,13 @@
         }
     }
 }
+
+.level__check {
+    font-weight: bold;
+    -webkit-text-stroke-width: 1px;
+    color: $color-primary;
+
+    &.done {
+        color: $color-done;
+    }
+}

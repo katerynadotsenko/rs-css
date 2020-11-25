@@ -460,6 +460,15 @@ tag {
   background-color: #3a3938;
 }
 
+.level__check {
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  color: #3a3938;
+}
+.level__check.done {
+  color: #62bd39;
+}
+
 .level-panel {
   display: flex;
   flex-grow: 1;

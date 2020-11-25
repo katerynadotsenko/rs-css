@@ -1,8 +1,8 @@
 export default class EditorCssPanelComponent {
-    constructor(level, answer, saveProgress) {
+    constructor(level, answer, updateProgress) {
         this.level = level;
         this.answer = answer;
-        this.saveProgress = saveProgress;
+        this.updateProgress = updateProgress;
     }
 
     render() {
@@ -95,7 +95,7 @@ export default class EditorCssPanelComponent {
                     item.classList.add('fly');
                 });
 
-                this.saveProgress(this.level);
+                this.updateProgress(this.level);
 
             } else {
                 this.shakeElements(selectorResult);

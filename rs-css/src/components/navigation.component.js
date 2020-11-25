@@ -1,17 +1,24 @@
 export default class NavigationComponent {
-    constructor(level, maxLevel, changeLevel) {
+    constructor(level, maxLevel, changeLevel, checkIsLevelDone) {
         this.level = level;
         this.maxLevel = maxLevel;
         this.changeLevel = changeLevel;
+        this.checkIsLevelDone = checkIsLevelDone;
     }
 
     render() {
         const navigation = document.createElement('div');
         navigation.classList.add('navigation');
 
+        const isDone = this.checkIsLevelDone(this.level);
+
         const navigationTop = document.createElement('div');
         navigationTop.classList.add('navigation__top');
-        navigationTop.innerHTML = `<h2 class="navigation__level">Level ${this.level} of ${this.maxLevel}</h2>`;
+        navigationTop.innerHTML = `<h2 class="navigation__level">Level ${this.level} of ${this.maxLevel}
+                                        <span class="level__check ${isDone ? 'done' : ''} material-icons">
+                                            done
+                                        </span>
+                                    </h2>`;
 
         const navigationArrows = document.createElement('div');
         navigationArrows.classList.add('navigation__arrows');
@@ -46,9 +53,13 @@ export default class NavigationComponent {
         return navigation;
     }
 
-    updateNavigationLevel() {
+    updateNavigationLevel(level=this.level) {
         const navigationLevel = document.querySelector('.navigation__level');
-        navigationLevel.innerHTML = `Level ${this.level} of ${this.maxLevel}`;
+        const isDone = this.checkIsLevelDone(level);
+        navigationLevel.innerHTML = `Level ${level} of ${this.maxLevel}
+                                        <span class="level__check ${isDone ? 'done' : ''} material-icons">
+                                            done
+                                        </span>`;
     }
 
     bindNavButtonListener(value, buttonElement) {
