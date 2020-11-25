@@ -68,6 +68,7 @@ export default class GameComponent {
         return childElement;
     }
 
+
     bindListeners(element, parentNode, childNode, nodePosition) {
 
         element.addEventListener('mouseover', (e) => {
@@ -77,13 +78,13 @@ export default class GameComponent {
             let elementInHtml;
 
             if (parentNode.tagName.toLowerCase() === 'div') {
-                elementInHtml = document.evaluate(`//div[@class='html-branch']//div`, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null );
+                elementInHtml = document.querySelectorAll('.html-branch > *')[nodePosition];
             } else {
-                elementInHtml = document.evaluate(`//div[@class='html-branch']//div[contains(text(), '${parentNode.tagName.toLowerCase()}')]//div`, 
-                                    document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null );
+                let indexOfParentNode = Array.from(parentNode.parentNode.children).indexOf(parentNode);
+                elementInHtml = document.querySelectorAll(`.html-branch > *`)[indexOfParentNode].children[nodePosition];
             }
 
-            elementInHtml.snapshotItem(nodePosition).classList.add('hovered');
+            elementInHtml.classList.add('hovered');
             element.classList.add('hovered');
 
             tooltipShow(element, childNode);
@@ -94,13 +95,13 @@ export default class GameComponent {
             let elementInHtml;
 
             if (parentNode.tagName.toLowerCase() === 'div') {
-                elementInHtml = document.evaluate(`//div[@class='html-branch']//div`, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null );
+                elementInHtml = document.querySelectorAll('.html-branch > *')[nodePosition];
             } else {
-                elementInHtml = document.evaluate(`//div[@class='html-branch']//div[contains(text(), '${parentNode.tagName.toLowerCase()}')]//div`, 
-                                    document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null );
+                let indexOfParentNode = Array.from(parentNode.parentNode.children).indexOf(parentNode);
+                elementInHtml = document.querySelectorAll(`.html-branch > *`)[indexOfParentNode].children[nodePosition];
             }
 
-            elementInHtml.snapshotItem(nodePosition).classList.remove('hovered');
+            elementInHtml.classList.remove('hovered');
             element.classList.remove('hovered');
 
             tooltipHide();
