@@ -5,12 +5,16 @@ import LevelPanelComponent from './level-panel.component.js';
 import NavigationComponent from './navigation.component.js';
 import levelsData from '../data/levels.data.js';
 
+import Service from '../service.js';
+
 export default class App {
     constructor() {
-        this.level = 5;
+        this.service = new Service();
+
+        this.level = this.service.getCurrentLevel();
         this.taskComponent = new TaskComponent(levelsData[this.level - 1].task);
         this.gameComponent = new GameComponent(levelsData[this.level - 1].nodes);
-        this.editorComponent = new EditorComponent(levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer);
+        this.editorComponent = new EditorComponent(this.level, levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer, (level) => this.saveProgress(level));
         this.levelPanelComponent = new LevelPanelComponent(levelsData[this.level - 1]);
         this.navigationComponent = new NavigationComponent(this.level, levelsData.length, (level) => this.changeLevel(level));
     }
@@ -30,9 +34,15 @@ export default class App {
     changeLevel(level) {
         this.level = level;
 
+        this.service.setCurrentLevel(level);
+
         this.levelPanelComponent.updateLevelDescription(levelsData[this.level - 1]);
         this.gameComponent.updateNodes(levelsData[this.level - 1].nodes);
-        this.editorComponent.updateEditorComponents(levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer);
+        this.editorComponent.updateEditorComponents(this.level, levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer);
         this.taskComponent.updateTask(levelsData[this.level - 1].task);
+    }
+
+    saveProgress(level) {
+        this.service.setProgress(level);
     }
 }

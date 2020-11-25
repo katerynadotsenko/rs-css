@@ -1,6 +1,8 @@
 export default class EditorCssPanelComponent {
-    constructor(answer) {
+    constructor(level, answer, saveProgress) {
+        this.level = level;
         this.answer = answer;
+        this.saveProgress = saveProgress;
     }
 
     render() {
@@ -38,7 +40,8 @@ export default class EditorCssPanelComponent {
 
     }
 
-    updateCss(answer) {
+    updateCss(level, answer) {
+        this.level = level;
         this.answer = answer;
     }
 
@@ -91,6 +94,8 @@ export default class EditorCssPanelComponent {
                     item.classList.remove('dance');
                     item.classList.add('fly');
                 });
+
+                this.saveProgress(this.level);
 
             } else {
                 this.shakeElements(selectorResult);

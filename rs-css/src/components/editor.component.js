@@ -2,9 +2,9 @@ import EditorCssPanelComponent from './editor-css-panel.component.js';
 import EditorHtmlPanelComponent from './editor-html-panel.component.js';
 
 export default class EditorComponent {
-    constructor(nodes, answer) {
+    constructor(level, nodes, answer, saveProgress) {
         this.nodes = nodes;
-        this.editorCssPanelComponent = new EditorCssPanelComponent(answer);
+        this.editorCssPanelComponent = new EditorCssPanelComponent(level, answer, saveProgress);
         this.editorHtmlPanelComponent = new EditorHtmlPanelComponent(nodes);
     }
 
@@ -18,8 +18,8 @@ export default class EditorComponent {
         return editor;
     }
 
-    updateEditorComponents(nodes, answer) {
+    updateEditorComponents(level, nodes, answer) {
         this.editorHtmlPanelComponent.updateHtml(nodes);
-        this.editorCssPanelComponent.updateCss(answer);
+        this.editorCssPanelComponent.updateCss(level, answer);
     }
 }
