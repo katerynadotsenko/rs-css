@@ -6,6 +6,7 @@
     &__top {
         display: flex;
         justify-content: flex-end;
+        padding-bottom: 20px;
     }
 
     &__level {
@@ -30,10 +31,28 @@
     }
 
     &__menu-toggle {
-        position: relative;
-        width: 28px;
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        width: 27px;
         height: 20px;
         cursor: pointer;
+        z-index: 11;
+
+        &.active {
+            &:before {
+                transform: rotate(45deg);
+
+            }
+
+            &:after {
+                transform: rotate(-45deg);
+            }
+
+            & span {
+                display: none;
+            }
+        }
 
         &:hover span,
         &:hover:before,
@@ -44,12 +63,13 @@
         &:before {
             content: '';
             top: 0;
-
+            transform-origin: left top;
         }
 
         &:after {
             content: '';
             bottom: 0;
+            transform-origin: left bottom;
         }
 
         & span {

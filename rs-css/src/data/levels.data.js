@@ -121,7 +121,7 @@ const levelsData = [
                 }
             ]
         ],
-        task: 'Select the 5rd egg',
+        task: 'Select the 5th egg',
         description: {
             selectorName: 'Nth Child Pseudo-selector',
             title: 'Select an element by its order in another element',

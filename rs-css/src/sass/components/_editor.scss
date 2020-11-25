@@ -4,6 +4,7 @@
     left: 0;
     font-family: monospace, sans-serif;
     display: flex;
+    flex-wrap: wrap;
     width: 90%;
     height: 40%;
     border-radius: 3px;
@@ -14,8 +15,9 @@
 
 
 .css-panel {
-    flex-basis: 50%;
+    flex-grow: 1;
     height: 100%;
+    overflow: hidden;
 
     &__header {
         display: flex;
@@ -56,7 +58,8 @@
 }
 
 .html-panel {
-    flex-basis: 50%;
+    flex-grow: 1;
+    overflow: hidden;
 
     &__header {
         display: flex;

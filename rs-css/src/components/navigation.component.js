@@ -36,16 +36,18 @@ export default class NavigationComponent {
         const menuToggle = document.createElement('div');
         menuToggle.classList.add('navigation__menu-toggle');
         menuToggle.innerHTML = '<span></span>';
+        this.bindNavButtonListener('toggle-menu', menuToggle);
 
         const chooseLevelButton = document.createElement('button');
         chooseLevelButton.classList.add('navigation__choose-level-button');
         chooseLevelButton.innerText = 'choose a level';
+        this.bindNavButtonListener('toggle-level-list', chooseLevelButton);
 
         navigationArrows.append(buttonPrev);
         navigationArrows.append(buttonNext);
 
         navigationTop.append(navigationArrows);
-        navigationTop.append(menuToggle);
+        document.body.append(menuToggle);
 
         navigation.append(navigationTop);
         navigation.append(chooseLevelButton);
@@ -54,6 +56,7 @@ export default class NavigationComponent {
     }
 
     updateNavigationLevel(level) {
+        this.level = level;
         const navigationLevel = document.querySelector('.navigation__level');
         const isDone = this.checkIsLevelDone(level);
         navigationLevel.innerHTML = `Level ${level} of ${this.maxLevel}
@@ -78,6 +81,24 @@ export default class NavigationComponent {
                     if (this.level < this.maxLevel) {
                         this.level = this.level + 1;
                         this.changeLevel(this.level);
+                    }
+                });
+                break;
+            case 'toggle-menu':
+                buttonElement.addEventListener('click', () => {
+                    const rightContainer = document.querySelector('.right-container');
+                    buttonElement.classList.toggle('active');
+                    rightContainer.classList.toggle('active');
+                });
+                break;
+            case 'toggle-level-list':
+                buttonElement.addEventListener('click', () => {
+                    const levelsNavigation = document.querySelector('.levels-navigation');
+                    levelsNavigation.classList.toggle('active');
+                    if (levelsNavigation.classList.contains('active')) {
+                        buttonElement.innerText = 'show description';
+                    } else {
+                        buttonElement.innerText = 'choose a level';
                     }
                 });
                 break;

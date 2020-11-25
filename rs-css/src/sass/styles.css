@@ -10,17 +10,19 @@ html {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-  display: flex;
-  height: 100vh;
-}
-
 h3 {
   padding-bottom: 10px;
 }
 
 h4 {
   padding-bottom: 15px;
+}
+
+.app-container {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 .left-container {
@@ -35,12 +37,22 @@ h4 {
 }
 
 .right-container {
+  position: fixed;
+  top: 0;
+  right: -100%;
   flex-grow: 1;
   max-width: 370px;
   height: 100%;
   background-color: #20201f;
   font-size: 1.5rem;
   line-height: 2.3rem;
+  transition: 0.3s linear;
+  overflow: hidden;
+  z-index: 10;
+}
+.right-container.active {
+  position: static;
+  right: 0;
 }
 
 .tooltip {
@@ -154,20 +166,6 @@ tag {
 .game .fly {
   top: -60vh !important;
 }
-.game .fly:before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -40%;
-  display: block;
-  width: 50%;
-  height: 50%;
-  transform: translateX(-50%);
-  background-image: url("/src/assets/img/rocket-fire-flame.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}
 
 .game bird {
   position: relative;
@@ -176,7 +174,7 @@ tag {
   width: 10vw;
   height: 10vw;
   transform: matrix(1, 0, 0, 1, 0, 0);
-  transition: top 1s linear;
+  transition: top 0.1s linear;
   z-index: 1;
 }
 .game bird:after {
@@ -194,9 +192,6 @@ tag {
 .game bird.red {
   width: 14vw;
   height: 14vw;
-}
-.game bird.red:before {
-  transform: translate(-45%, -27%);
 }
 .game bird.red:after {
   width: 100%;
@@ -222,7 +217,7 @@ tag {
   width: 5vw;
   height: 5vw;
   transform: matrix(1, 0, 0, 1, 0, 0);
-  transition: top 1s linear;
+  transition: top 0.1s linear;
   z-index: 1;
 }
 .game egg:after {
@@ -259,7 +254,7 @@ tag {
   width: 10vw;
   min-height: 10vh;
   transform: matrix(1, 0, 0, 1, 0, 0);
-  transition: top 0.5s linear;
+  transition: top 0.1s linear;
 }
 .game nest:after {
   content: "";
@@ -299,6 +294,7 @@ tag {
   left: 0;
   font-family: monospace, sans-serif;
   display: flex;
+  flex-wrap: wrap;
   width: 90%;
   height: 40%;
   border-radius: 3px;
@@ -308,8 +304,9 @@ tag {
 }
 
 .css-panel {
-  flex-basis: 50%;
+  flex-grow: 1;
   height: 100%;
+  overflow: hidden;
 }
 .css-panel__header {
   display: flex;
@@ -347,7 +344,8 @@ tag {
 }
 
 .html-panel {
-  flex-basis: 50%;
+  flex-grow: 1;
+  overflow: hidden;
 }
 .html-panel__header {
   display: flex;
@@ -398,6 +396,7 @@ tag {
 .navigation__top {
   display: flex;
   justify-content: flex-end;
+  padding-bottom: 20px;
 }
 .navigation__level {
   flex-grow: 6;
@@ -417,10 +416,22 @@ tag {
   color: #dfdfdf;
 }
 .navigation__menu-toggle {
-  position: relative;
-  width: 28px;
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  width: 27px;
   height: 20px;
   cursor: pointer;
+  z-index: 11;
+}
+.navigation__menu-toggle.active:before {
+  transform: rotate(45deg);
+}
+.navigation__menu-toggle.active:after {
+  transform: rotate(-45deg);
+}
+.navigation__menu-toggle.active span {
+  display: none;
 }
 .navigation__menu-toggle:hover span, .navigation__menu-toggle:hover:before, .navigation__menu-toggle:hover:after {
   background-color: #dfdfdf;
@@ -428,10 +439,12 @@ tag {
 .navigation__menu-toggle:before {
   content: "";
   top: 0;
+  transform-origin: left top;
 }
 .navigation__menu-toggle:after {
   content: "";
   bottom: 0;
+  transform-origin: left bottom;
 }
 .navigation__menu-toggle span {
   top: 50%;
@@ -474,7 +487,7 @@ tag {
   flex-grow: 1;
   flex-direction: column;
   width: 100%;
-  padding: 20px;
+  padding: 5px 20px;
 }
 .level-panel__header {
   height: 70px;
@@ -495,6 +508,34 @@ tag {
 }
 .description__example {
   padding-bottom: 8px;
+}
+
+.levels-navigation {
+  height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+  overflow: hidden;
+  transition: 0.2s linear;
+}
+.levels-navigation.active {
+  height: 100%;
+}
+.levels-navigation__item {
+  padding: 5px;
+  cursor: pointer;
+}
+.levels-navigation__item:hover {
+  background-color: #272727;
+}
+.levels-navigation__item.active {
+  background-color: #2a2a2a;
+}
+.levels-navigation__item > * {
+  padding-right: 5px;
+}
+.levels-navigation .level__check {
+  font-size: 1.6rem;
 }
 
 /*# sourceMappingURL=styles.css.map */
