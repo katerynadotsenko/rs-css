@@ -15,7 +15,8 @@ export default class App {
         this.level = this.service.getCurrentLevel();
         this.taskComponent = new TaskComponent(levelsData[this.level - 1].task);
         this.gameComponent = new GameComponent(levelsData[this.level - 1].nodes);
-        this.editorComponent = new EditorComponent(this.level, levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer, (level) => this.updateProgress(level));
+        this.editorComponent = new EditorComponent(this.level, levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer, 
+                                                        (level) => this.updateProgress(level), (level) => this.changeLevel(level));
         this.levelPanelComponent = new LevelPanelComponent(levelsData[this.level - 1]);
         this.navigationComponent = new NavigationComponent(this.level, levelsData.length, (level) => this.changeLevel(level), (level) => this.checkIsLevelDone(level));
     }
@@ -41,6 +42,7 @@ export default class App {
         this.gameComponent.updateNodes(levelsData[this.level - 1].nodes);
         this.editorComponent.updateEditorComponents(this.level, levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer);
         this.taskComponent.updateTask(levelsData[this.level - 1].task);
+        this.navigationComponent.updateNavigationLevel(this.level);
     }
 
     saveProgress(level) {

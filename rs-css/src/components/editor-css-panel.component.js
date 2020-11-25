@@ -1,8 +1,9 @@
 export default class EditorCssPanelComponent {
-    constructor(level, answer, updateProgress) {
+    constructor(level, answer, updateProgress, changeLevel) {
         this.level = level;
         this.answer = answer;
         this.updateProgress = updateProgress;
+        this.changeLevel = changeLevel;
     }
 
     render() {
@@ -96,6 +97,10 @@ export default class EditorCssPanelComponent {
                 });
 
                 this.updateProgress(this.level);
+                setTimeout(() => {
+                    this.changeLevel(this.level + 1);
+                }, 1000)
+               
 
             } else {
                 this.shakeElements(selectorResult);

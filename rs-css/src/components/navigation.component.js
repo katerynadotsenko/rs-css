@@ -53,7 +53,7 @@ export default class NavigationComponent {
         return navigation;
     }
 
-    updateNavigationLevel(level=this.level) {
+    updateNavigationLevel(level) {
         const navigationLevel = document.querySelector('.navigation__level');
         const isDone = this.checkIsLevelDone(level);
         navigationLevel.innerHTML = `Level ${level} of ${this.maxLevel}
@@ -70,7 +70,6 @@ export default class NavigationComponent {
                     if (this.level > 1) {
                         this.level = this.level - 1;
                         this.changeLevel(this.level);
-                        this.updateNavigationLevel();
                     }
                 });
                 break;
@@ -79,7 +78,6 @@ export default class NavigationComponent {
                     if (this.level < this.maxLevel) {
                         this.level = this.level + 1;
                         this.changeLevel(this.level);
-                        this.updateNavigationLevel();
                     }
                 });
                 break;
