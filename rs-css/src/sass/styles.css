@@ -342,6 +342,36 @@ tag {
   color: #a0a0a0;
   background: #dfdfdf;
 }
+.css-panel__input {
+  flex-grow: 1;
+  margin-right: 10px;
+  line-height: 2.2rem;
+  outline-style: none;
+  border: none;
+  background-color: transparent;
+}
+.css-panel__input.highlighting {
+  animation: highlighting 0.5s infinite;
+}
+@keyframes highlighting {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: #d0e7c7;
+  }
+}
+.css-panel__button {
+  border: 1px solid #a0a0a0;
+  border-radius: 2px;
+  outline-style: none;
+  background-color: #dfdfdf;
+  color: #3a3938;
+  padding: 0 5px;
+  font-size: 1.2rem;
+  line-height: 2rem;
+  cursor: pointer;
+}
 
 .html-panel {
   flex-grow: 1;

@@ -43,6 +43,9 @@ export default class App {
         rightContainer.append(this.navigationComponent.render());
         rightContainer.append(this.levelNavigationComponent.render());
         rightContainer.append(this.levelPanelComponent.render());
+
+        const cssPanelInput = document.querySelector('.css-panel__input');
+        cssPanelInput.focus();
     }
 
     changeLevel(level) {
