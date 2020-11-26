@@ -1,8 +1,25 @@
 export default class Service {
 
-    setProgress(id) {
+    setProgress(id, isDone, isWithHelp) {
         const progressBirds = this.getProgress();
-        progressBirds.push(id);
+        const data = {
+            id: id,
+            isDone: isDone,
+            isWithHelp: isWithHelp
+        }
+
+        let isExist = false;
+        for (let i in progressBirds) {
+            if (progressBirds[i].id === id) {
+                progressBirds[i] = data;
+                isExist = true;
+            }
+        }
+        
+        if (!isExist) {
+            progressBirds.push(data);
+        }
+        
         localStorage.setItem('progressBirds', JSON.stringify(progressBirds));
 
     }

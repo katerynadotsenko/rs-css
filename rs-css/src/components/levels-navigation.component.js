@@ -1,8 +1,9 @@
 export default class LevelNavigationComponent {
-    constructor(level, levelsData, checkIsLevelDone, changeLevel) {
+    constructor(level, levelsData, checkIsLevelDone, checkIsUsedHelp, changeLevel) {
         this.level = level;
         this.levelsData = levelsData;
         this.checkIsLevelDone = checkIsLevelDone;
+        this.checkIsUsedHelp = checkIsUsedHelp;
         this.changeLevel = changeLevel;
     }
 
@@ -20,6 +21,8 @@ export default class LevelNavigationComponent {
 
         this.levelsData.forEach(level => {
             const isDone = this.checkIsLevelDone(level.level);
+            const isWithHelp = this.checkIsUsedHelp(level.level);
+
             const isActive = level.level === this.level;
 
             const levelsNavigationItem = document.createElement('div');
@@ -31,6 +34,9 @@ export default class LevelNavigationComponent {
 
             levelsNavigationItem.innerHTML += `<span class="level__check ${isDone ? 'done' : ''} material-icons">
                                             done
+                                        </span>
+                                        <span class="level__with-help ${isWithHelp ? 'active' : ''} material-icons">
+                                            remove_red_eye
                                         </span>
                                         <span>${level.level}</span>
                                         <span>${level.description.syntax}</span>`;
@@ -54,9 +60,15 @@ export default class LevelNavigationComponent {
         this.level = level;
     }
 
-    updateLevelToDone(level) {
-        const levelToUpdate = document.querySelectorAll('.levels-navigation .level__check')[level - 1];
+    updateLevelStatus(level, isDone, isWithHelp) {
+        if (isDone) {
+            const levelToUpdateDone = document.querySelectorAll('.levels-navigation .level__check')[level - 1];
+            levelToUpdateDone.classList.add('done');
+        }
 
-        levelToUpdate.classList.add('done');
+        if (isWithHelp) {
+            const levelToUpdateWithHelp = document.querySelectorAll('.levels-navigation .level__with-help')[level - 1];
+            levelToUpdateWithHelp.classList.add('active');
+        }
     }
 }

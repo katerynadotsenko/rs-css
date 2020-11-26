@@ -1,9 +1,10 @@
 export default class NavigationComponent {
-    constructor(level, maxLevel, changeLevel, checkIsLevelDone) {
+    constructor(level, maxLevel, changeLevel, checkIsLevelDone, checkIsUsedHelp) {
         this.level = level;
         this.maxLevel = maxLevel;
         this.changeLevel = changeLevel;
         this.checkIsLevelDone = checkIsLevelDone;
+        this.checkIsUsedHelp = checkIsUsedHelp;
     }
 
     render() {
@@ -11,12 +12,17 @@ export default class NavigationComponent {
         navigation.classList.add('navigation');
 
         const isDone = this.checkIsLevelDone(this.level);
+        const isWithHelp = this.checkIsUsedHelp(this.level);
 
         const navigationTop = document.createElement('div');
         navigationTop.classList.add('navigation__top');
-        navigationTop.innerHTML = `<h2 class="navigation__level">Level ${this.level} of ${this.maxLevel}
+        navigationTop.innerHTML = `<h2 class="navigation__level">
+                                        <span>Level ${this.level} of ${this.maxLevel}</span>
                                         <span class="level__check ${isDone ? 'done' : ''} material-icons">
                                             done
+                                        </span>
+                                        <span class="level__with-help ${isWithHelp ? 'active' : ''} material-icons">
+                                            remove_red_eye
                                         </span>
                                     </h2>`;
 
@@ -59,9 +65,14 @@ export default class NavigationComponent {
         this.level = level;
         const navigationLevel = document.querySelector('.navigation__level');
         const isDone = this.checkIsLevelDone(level);
-        navigationLevel.innerHTML = `Level ${level} of ${this.maxLevel}
+        const isWithHelp = this.checkIsUsedHelp(this.level);
+
+        navigationLevel.innerHTML = `<span>Level ${level} of ${this.maxLevel}</span>
                                         <span class="level__check ${isDone ? 'done' : ''} material-icons">
                                             done
+                                        </span>
+                                        <span class="level__with-help ${isWithHelp ? 'active' : ''} material-icons">
+                                            remove_red_eye
                                         </span>`;
     }
 

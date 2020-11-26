@@ -20,10 +20,12 @@ export default class App {
         this.taskComponent = new TaskComponent(levelsData[this.level - 1].task);
         this.gameComponent = new GameComponent(levelsData[this.level - 1].nodes);
         this.editorComponent = new EditorComponent(this.level, levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer, 
-                                                        (level) => this.updateProgress(level), (level) => this.changeLevel(level));
+                                                        (level, isDone, isWithHelp) => this.updateProgress(level, isDone, isWithHelp), (level) => this.changeLevel(level));
         this.levelPanelComponent = new LevelPanelComponent(levelsData[this.level - 1], () => this.writeAnswer());
-        this.navigationComponent = new NavigationComponent(this.level, levelsData.length, (level) => this.changeLevel(level), (level) => this.checkIsLevelDone(level));
-        this.levelNavigationComponent = new LevelNavigationComponent(this.level, levelsData, (level) => this.checkIsLevelDone(level), (level) => this.changeLevel(level));
+        this.navigationComponent = new NavigationComponent(this.level, levelsData.length, (level) => this.changeLevel(level), 
+                                                                (level) => this.checkIsLevelDone(level), (level) => this.checkIsUsedHelp(level));
+        this.levelNavigationComponent = new LevelNavigationComponent(this.level, levelsData, (level) => this.checkIsLevelDone(level), 
+                                                                    (level) => this.checkIsUsedHelp(level), (level) => this.changeLevel(level));
         this.footerComponent = new FooterComponent();
     }
 
@@ -65,22 +67,55 @@ export default class App {
         this.levelNavigationComponent.updateActiveLevel(this.level);
     }
 
-    saveProgress(level) {
-        this.service.setProgress(level);
+    saveProgress(level, isDone, isWithHelp) {
+        this.service.setProgress(level, isDone, isWithHelp);
     }
 
-    updateProgress(level) {
-        this.saveProgress(level);
+    updateProgress(level, isDone, isWithHelp) {
+        this.saveProgress(level, isDone, isWithHelp);
         this.progress = this.service.getProgress();
         this.navigationComponent.updateNavigationLevel(level);
-        this.levelNavigationComponent.updateLevelToDone(level);
+        this.levelNavigationComponent.updateLevelStatus(level, isDone, isWithHelp);
     }
 
     checkIsLevelDone(level) {
-        return this.progress.includes(level);
+        let isDone = false;
+
+        for(let i in this.progress) {
+            if (this.progress[i].id === level) {
+                isDone = this.progress[i].isDone;
+            }
+        }
+        return isDone;
+    }
+
+    checkIsUsedHelp(level) {
+        let isWithHelp = false;
+
+        for(let i in this.progress) {
+            if (this.progress[i].id === level) {
+                isWithHelp = this.progress[i].isWithHelp;
+            }
+        }
+        return isWithHelp;
+    }
+
+    getLevelInProgress() {
+        return this.progress.filter(level => level.id === this.level);
     }
 
     writeAnswer() {
         this.editorComponent.writeAnswer();
+        const isWithHelp = true;
+        let isDone = false;
+        const levelData = this.getLevelInProgress();
+
+        if (levelData.length) {
+            isDone = levelData[0].isDone;
+        }
+
+        if (!isDone) {
+            this.updateProgress(this.level, isDone, isWithHelp);
+        }
     }
 }

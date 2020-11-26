@@ -10,6 +10,8 @@
     }
 
     &__item {
+        display: flex;
+        align-items: center;
         padding: 5px;
         cursor: pointer;
 
@@ -28,5 +30,13 @@
 
     & .level__check {
         font-size: 1.6rem;
+    }
+
+    & .level__with-help {
+        color: $color-primary;
+
+        &.active {
+            color: $color-light;
+        }
     }
 }

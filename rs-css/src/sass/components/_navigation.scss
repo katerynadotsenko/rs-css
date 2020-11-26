@@ -10,7 +10,13 @@
     }
 
     &__level {
-        flex-grow: 6;
+        flex-grow: 3;
+        display: flex;
+        align-items: center;
+
+        &>* {
+            padding-right: 5px;
+        }
     }
 
     &__arrows {
@@ -113,5 +119,13 @@
 
     &.done {
         color: $color-done;
+    }
+}
+
+.level__with-help {
+    color: $color-primary;
+
+    &.active {
+        color: $color-light;
     }
 }

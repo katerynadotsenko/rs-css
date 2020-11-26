@@ -55,6 +55,6 @@ export default class LevelPanelComponent {
         const levelPanelDescription = document.querySelector('.level-panel__description');
         levelPanelDescription.remove();
 
-        levelPanel.append(this.generateLevelDescriptionView(this.levelDescription));
+        levelPanel.insertBefore(this.generateLevelDescriptionView(this.levelDescription), levelPanel.lastChild);
     }
 }

@@ -4,6 +4,7 @@ export default class EditorCssPanelComponent {
         this.answer = answer;
         this.updateProgress = updateProgress;
         this.changeLevel = changeLevel;
+        this.isWithHelp = false;
     }
 
     render() {
@@ -53,6 +54,7 @@ export default class EditorCssPanelComponent {
     updateCss(level, answer) {
         this.level = level;
         this.answer = answer;
+        this.isWithHelp = false;
     }
 
     shakeEditorWindow() {
@@ -84,6 +86,8 @@ export default class EditorCssPanelComponent {
     }
 
     writeAnswer() {
+        this.isWithHelp = true;
+
         const cssPanelInput = document.querySelector('.css-panel__input');
         cssPanelInput.value = '';
 
@@ -117,7 +121,9 @@ export default class EditorCssPanelComponent {
                         item.classList.add('fly');
                     });
 
-                    this.updateProgress(this.level);
+                    const isDone = true;
+
+                    this.updateProgress(this.level, isDone, this.isWithHelp);
                     cssPanelInput.value = '';
 
                     setTimeout(() => {
