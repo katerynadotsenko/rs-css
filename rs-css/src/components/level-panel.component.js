@@ -9,8 +9,21 @@ export default class LevelPanelComponent {
         levelPanel.classList.add('level-panel');
 
         levelPanel.append(this.generateLevelDescriptionView(this.levelDescription));
+        levelPanel.append(this.generateHelpButton());
 
         return levelPanel;
+    }
+
+    generateHelpButton() {
+        const helpButton = document.createElement('button');
+        helpButton.classList.add('description__help');
+        helpButton.innerText = 'Help';
+
+        helpButton.addEventListener('click', () => {
+            this.writeAnswer();
+        });
+
+        return helpButton;
     }
 
     generateLevelDescriptionView(levelDescription) {
@@ -31,16 +44,6 @@ export default class LevelPanelComponent {
                                             <div class="description__hint">${levelDescription.description.hint}</div>
                                             <h4>Examples</h4>`;
         levelPanelDescription.append(examples);
-
-        const helpButton = document.createElement('button');
-        helpButton.classList.add('description__help');
-        helpButton.innerText = 'Help';
-
-        helpButton.addEventListener('click', () => {
-            this.writeAnswer();
-        });
-
-        levelPanelDescription.append(helpButton);
 
         return levelPanelDescription;
     }

@@ -1,0 +1,16 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 35%;
+    color: $color-light;
+    padding: 10px 0;
+
+    & img {
+        height: 30px;
+    }
+
+    & a {
+        color: $color-light;
+    }
+}

@@ -4,6 +4,8 @@ import EditorComponent from './editor.component.js';
 import LevelPanelComponent from './level-panel.component.js';
 import NavigationComponent from './navigation.component.js';
 import LevelNavigationComponent from './levels-navigation.component.js';
+import FooterComponent from './footer.component.js';
+
 import levelsData from '../data/levels.data.js';
 
 import Service from '../service.js';
@@ -22,6 +24,7 @@ export default class App {
         this.levelPanelComponent = new LevelPanelComponent(levelsData[this.level - 1], () => this.writeAnswer());
         this.navigationComponent = new NavigationComponent(this.level, levelsData.length, (level) => this.changeLevel(level), (level) => this.checkIsLevelDone(level));
         this.levelNavigationComponent = new LevelNavigationComponent(this.level, levelsData, (level) => this.checkIsLevelDone(level), (level) => this.changeLevel(level));
+        this.footerComponent = new FooterComponent();
     }
 
     init() {
@@ -39,6 +42,7 @@ export default class App {
         leftContainer.append(this.taskComponent.render());
         leftContainer.append(this.gameComponent.render());
         leftContainer.append(this.editorComponent.render());
+        leftContainer.append(this.footerComponent.render());
 
         rightContainer.append(this.navigationComponent.render());
         rightContainer.append(this.levelNavigationComponent.render());

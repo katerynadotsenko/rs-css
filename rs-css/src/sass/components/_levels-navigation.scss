@@ -2,12 +2,11 @@
     height: 0;
     display: flex;
     flex-direction: column;
-    padding: 0 15px;
     overflow: hidden;
     transition: .2s linear;
 
     &.active {
-        height: 100%;
+        flex-grow: 1;
     }
 
     &__item {
