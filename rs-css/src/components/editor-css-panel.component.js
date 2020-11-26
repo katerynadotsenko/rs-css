@@ -83,6 +83,17 @@ export default class EditorCssPanelComponent {
         });
     }
 
+    writeAnswer() {
+        const cssPanelInput = document.querySelector('.css-panel__input');
+        cssPanelInput.value = '';
+
+        [...this.answer[1]].forEach((letter, i) => {
+            setTimeout(() => {
+                cssPanelInput.value += letter;
+            }, 200 * i);
+        });
+    }
+
     checkSelector() {
         try {
             const cssPanelInput = document.querySelector('.css-panel__input');
@@ -100,16 +111,17 @@ export default class EditorCssPanelComponent {
             } else {
                 const selectorResultWithDance = [...selectorResult].filter(node => node.classList.contains('dance'));
 
-                if (selectorResultWithDance.length == this.answer && selectorResult.length == this.answer) {
+                if (selectorResultWithDance.length == this.answer[0] && selectorResult.length == this.answer[0]) {
                     [...selectorResult].forEach(item => {
                         item.classList.remove('dance');
                         item.classList.add('fly');
                     });
 
                     this.updateProgress(this.level);
+                    cssPanelInput.value = '';
+
                     setTimeout(() => {
                         this.changeLevel(this.level + 1);
-                        cssPanelInput.value = '';
                         cssPanelInput.classList.add('highlighting');
                     }, 1000)
                 

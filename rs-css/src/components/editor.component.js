@@ -22,4 +22,8 @@ export default class EditorComponent {
         this.editorHtmlPanelComponent.updateHtml(nodes);
         this.editorCssPanelComponent.updateCss(level, answer);
     }
+
+    writeAnswer() {
+        this.editorCssPanelComponent.writeAnswer();
+    }
 }

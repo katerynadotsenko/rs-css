@@ -37,6 +37,8 @@ h4 {
 }
 
 .right-container {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   top: 0;
   right: -100%;
@@ -513,6 +515,7 @@ tag {
 }
 
 .level-panel {
+  position: relative;
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -538,6 +541,22 @@ tag {
 }
 .description__example {
   padding-bottom: 8px;
+}
+.description__help {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  width: calc(100% - 40px);
+  transform: translateX(-50%);
+  background-color: transparent;
+  border: 2px solid #3a3938;
+  color: #a0a0a0;
+  font-size: 1.8rem;
+  line-height: 4rem;
+  cursor: pointer;
+}
+.description__help:hover {
+  background-color: #272727;
 }
 
 .levels-navigation {

@@ -25,7 +25,7 @@ const levelsData = [
             hint: 'Selects all elements of type <tag>X</tag>. Type refers to the type of tag, so div, p and ul are all different element types.',
             examples: ['<tag>div</tag> selects all <tag>&lt;div&gt;</tag> elements.', '<tag>p</tag> selects all <tag>&lt;p&gt;</tag> elements.']
         },
-        answer: 3
+        answer: [3, 'bird']
     },
     {
         level: 2,
@@ -51,7 +51,7 @@ const levelsData = [
             hint: 'The class selector selects all elements with that class attribute. Elements can only have one ID, but many classes.',
             examples: ['<tag>.neato</tag> selects all elements with <tag>class="neato"</tag>']
         },
-        answer: 1
+        answer: [1, '.red']
     },
     {
         level: 3,
@@ -89,7 +89,7 @@ const levelsData = [
             examples: ['<tag>:first-child</tag> selects all first child elements.', '<tag>p:first-child</tag> selects all first child <tag>&lt;p&gt;</tag> elements.',
                         '<tag>div p:first-child</tag> selects all first child <tag>&lt;p&gt;</tag> elements that are in a <tag>&lt;div&gt;</tag>']
         },
-        answer: 1
+        answer: [1, 'egg:first-child']
     },
     {
         level: 4,
@@ -130,7 +130,7 @@ const levelsData = [
             examples: ['<tag>:nth-child(8)</tag> selects every element that is the 8th child of another element.',
                         '<tag>div p:nth-child(2)</tag> selects the second <tag>p</tag> in every <tag>div</tag>']
         },
-        answer: 1
+        answer: [1, 'egg:nth-child(5)']
     }
     ,
     {
@@ -187,7 +187,7 @@ const levelsData = [
             examples: ['<tag>span:only-child</tag> selects the <tag>&lt;span&gt;</tag> elements that are the only child of some other element.',
                         '<tag>ul li:only-child</tag> selects the only <tag>&lt;li&gt;</tag> element that are in a <tag>&lt;ul&gt;</tag>.']
         },
-        answer: 2
+        answer: [2, 'nest *:only-child']
     }
 ];
 
