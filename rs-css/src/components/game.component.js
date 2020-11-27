@@ -17,11 +17,15 @@ export default class GameComponent {
     generateDom() {
         const branch = document.createElement('div');
         branch.classList.add('game__branch');
+
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('wrapper', 'wrapper_game-container');
         
         const branchContainer = document.createElement('div');
         branchContainer.classList.add('game__branch__container');
 
-        branch.append(branchContainer);
+        wrapper.append(branchContainer);
+        branch.append(wrapper);
 
         this.generateNodes(branchContainer, this.nodes[1]);
 

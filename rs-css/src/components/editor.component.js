@@ -9,13 +9,18 @@ export default class EditorComponent {
     }
 
     render() {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('wrapper', 'wrapper_editor');
+
         const editor = document.createElement('div');
         editor.classList.add('editor');
 
         editor.append(this.editorCssPanelComponent.render());
         editor.append(this.editorHtmlPanelComponent.render());
 
-        return editor;
+        wrapper.append(editor);
+
+        return wrapper;
     }
 
     updateEditorComponents(level, nodes, answer) {

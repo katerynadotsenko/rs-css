@@ -31,10 +31,38 @@ h4 {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    margin: auto;
     height: 100%;
-    background-color: $color-primary;
     font-size: 1.5rem;
     padding-right: 20px;
+    background-color: $color-primary;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: $content-width;
+
+    &_task {
+        flex-basis: 20%;
+    }
+
+    &_editor {
+        width: 100%;
+        flex-basis: 40%;
+
+        @include media-small {
+            flex-basis: 50%;
+        }
+    }
+
+    &_game-container {
+        align-items: flex-end;
+        position: relative;
+        width: 100%;
+        height: 80%;
+    }
 }
 
 .right-container {

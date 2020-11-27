@@ -4,11 +4,16 @@ export default class TaskComponent {
     }
 
     render() {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('wrapper', 'wrapper_task');
+        
         const task = document.createElement('div');
         task.classList.add('task');
         task.innerText = `${this.task}`;
 
-        return task;
+        wrapper.append(task);
+
+        return wrapper;
     }
 
     updateTask(task) {
