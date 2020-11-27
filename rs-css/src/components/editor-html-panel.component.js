@@ -17,11 +17,8 @@ export default class EditorHtmlPanelComponent {
 
         const branchTag = document.createElement('div');
         branchTag.classList.add('html-branch');
-        branchTag.appendChild(document.createTextNode('<div class="branch">'));
 
-        this.generateHtml(branchTag, this.nodes[1]);
-
-        branchTag.appendChild(document.createTextNode('</div>'));
+        this.generateFullHtml(branchTag, this.nodes[1]);
 
         editorHtmlWindow.append(branchTag);
         editorHtmlPanel.append(editorHtmlWindow);
@@ -29,15 +26,29 @@ export default class EditorHtmlPanelComponent {
         return editorHtmlPanel;
     }
 
+    generateFullHtml(branchTag, node) {
+
+        branchTag.append(this.highlightWrapper('<', 'text'));
+        branchTag.append(this.highlightWrapper('div', 'highlight_tag'));
+        branchTag.append(this.highlightWrapper(' class', 'highlight_class'));
+        branchTag.append(this.highlightWrapper('="', 'text'));
+        branchTag.append(this.highlightWrapper('branch', 'highlight_class-name'));
+        branchTag.append(this.highlightWrapper('"', 'text'));
+        branchTag.append(this.highlightWrapper('>', 'text'));
+
+        this.generateHtml(branchTag, node);
+
+        branchTag.append(this.highlightWrapper('</', 'text'));
+        branchTag.append(this.highlightWrapper('div', 'highlight_tag'));
+        branchTag.append(this.highlightWrapper('>', 'text'));
+    }
+
     updateHtml(nodes) {
         this.nodes = nodes;
         const branchTag = document.querySelector('.html-branch');
-
         branchTag.innerHTML = '';
-        branchTag.appendChild(document.createTextNode('<div class="branch">'));
 
-        this.generateHtml(branchTag, this.nodes[1]);
-        branchTag.appendChild(document.createTextNode('</div>'));
+        this.generateFullHtml(branchTag, this.nodes[1]);
     }
 
     generateHtml(parentNode, childNode) {
@@ -56,7 +67,9 @@ export default class EditorHtmlPanelComponent {
                     const childElement = this.appendChildElement(parentNode, node[0], nodePosition, isCloseTag);
                     this.generateHtml(childElement, node[1]);
 
-                    childElement.appendChild(document.createTextNode(`</${node[0].type}>`));
+                    childElement.append(this.highlightWrapper('</', 'text'));
+                    childElement.append(this.highlightWrapper(`${node[0].type}`, 'highlight_tag'));
+                    childElement.append(this.highlightWrapper('>', 'text'));
                 
                 } else {
 
@@ -67,20 +80,41 @@ export default class EditorHtmlPanelComponent {
         }
     }
 
+    highlightWrapper(content, type) {
+        if (type === 'text') {
+            return document.createTextNode(content);
+        } else {
+            const wrapper = document.createElement('span');
+            wrapper.classList.add('highlight', type);
+            wrapper.textContent = content;
+            return wrapper;
+        }
+    }
+
     appendChildElement(parentNode, childNode, nodePosition, isCloseTag=true) {
         const childElement = document.createElement('div');
 
-        let tagContent =  childNode.type;
-        const closeTag = isCloseTag ? ` />` : '>';
+        let fragment = document.createDocumentFragment();
+
+        fragment.append(this.highlightWrapper('<', 'text'));
+        fragment.append(this.highlightWrapper(`${childNode.type}`, 'highlight_tag'));
 
         if (childNode.className) {
             const classes = childNode.className.filter(item => item !== 'dance');
             if (classes.length) {
-                tagContent += ` class="${classes.join(' ')}"`;
+
+                fragment.append(this.highlightWrapper(' class', 'highlight_class'));
+                fragment.append(this.highlightWrapper('="', 'text'));
+                
+                fragment.append(this.highlightWrapper(`${classes.join(' ')}`, 'highlight_class-name'));
+                fragment.append(this.highlightWrapper('"', 'text'));
             }
         }
 
-        childElement.innerText = `<${tagContent + closeTag}`;
+        const closeTag = isCloseTag ? ` />` : '>';
+        fragment.append(this.highlightWrapper(closeTag, 'text'));
+
+        childElement.append(fragment);
 
         this.bindListeners(childElement, parentNode, childNode, nodePosition);
 
@@ -98,7 +132,7 @@ export default class EditorHtmlPanelComponent {
             if (parentNode.classList.contains('html-branch')) {
                 elementInGame = document.querySelectorAll('.game__branch__container > *')[nodePosition];
             } else {
-                let indexOfParentNode = Array.from(parentNode.parentNode.children).indexOf(parentNode);
+                let indexOfParentNode = Array.from(parentNode.parentNode.children).filter(node => node.tagName === 'DIV').indexOf(parentNode);
                 elementInGame = document.querySelectorAll(`.game__branch__container > *`)[indexOfParentNode].childNodes[nodePosition];
             }
             
@@ -115,7 +149,7 @@ export default class EditorHtmlPanelComponent {
             if (parentNode.classList.contains('html-branch')) {
                 elementInGame = document.querySelectorAll('.game__branch__container > *')[nodePosition];
             } else {
-                let indexOfParentNode = Array.from(parentNode.parentNode.children).indexOf(parentNode);
+                let indexOfParentNode = Array.from(parentNode.parentNode.children).filter(node => node.tagName === 'DIV').indexOf(parentNode);
                 elementInGame = document.querySelectorAll(`.game__branch__container > *`)[indexOfParentNode].childNodes[nodePosition];
             }
             

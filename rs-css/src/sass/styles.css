@@ -419,7 +419,21 @@ tag {
   padding-left: 20px;
 }
 .html-panel__line-numbers + div *.hovered {
-  color: #dfdfdf;
+  filter: brightness(150%);
+}
+
+.highlight {
+  font-weight: bold;
+  padding: 0 !important;
+}
+.highlight_tag {
+  color: #54a54d;
+}
+.highlight_class {
+  color: #2067b8;
+}
+.highlight_class-name {
+  color: #e64b86;
 }
 
 .navigation {

@@ -137,8 +137,25 @@
             padding-left: 20px;
 
             &.hovered {
-                color: $color-light-2;
+                filter: brightness(150%);
             }
         }
+    }
+}
+
+.highlight {
+    font-weight: bold;
+    padding: 0 !important;
+
+    &_tag {
+        color: rgb(84, 165, 77);
+    }
+
+    &_class {
+        color: rgb(32, 103, 184);
+    }
+
+    &_class-name {
+        color: rgb(230, 75, 134);
     }
 }
