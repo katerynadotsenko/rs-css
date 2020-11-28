@@ -10,9 +10,13 @@ import levelsData from '../data/levels.data.js';
 
 import Service from '../service.js';
 
+//TODO shadow bg (menu) for devices
+
 export default class App {
     constructor() {
         this.service = new Service();
+
+        this.isRightPanelActive = this.setRightPanelMode();
 
         this.progress = this.service.getProgress();
         this.level = this.service.getCurrentLevel();
@@ -50,8 +54,21 @@ export default class App {
         rightContainer.append(this.levelNavigationComponent.render());
         rightContainer.append(this.levelPanelComponent.render());
 
+        if (this.isRightPanelActive) {
+            const menuToggle = document.querySelector('.navigation__menu-toggle');
+            menuToggle.classList.add('active');
+
+            rightContainer.classList.add('active');
+        }
+
         const cssPanelInput = document.querySelector('.css-panel__input');
         cssPanelInput.focus();
+    }
+
+    setRightPanelMode() {
+        const windowSize = window.innerWidth;
+
+        return windowSize > 768;
     }
 
     changeLevel(level) {

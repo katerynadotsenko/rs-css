@@ -84,7 +84,7 @@
     transition: bottom .1s linear;
     z-index: 1;
 
-    @include media-medium {
+    @include media-small {
         width: 15vw;
         height: 15vw;
     }
@@ -107,7 +107,7 @@
         width: 14vw;
         height: 14vw;
 
-        @include media-medium {
+        @include media-small {
             width: 19vw;
             height: 19vw;
         }
@@ -124,7 +124,7 @@
         width: 14vw;
         height: 14vw;
 
-        @include media-medium {
+        @include media-small {
             width: 19vw;
             height: 19vw;
         }
@@ -148,7 +148,7 @@
     transition: bottom .1s linear;
     z-index: 1;
 
-    @include media-medium {
+    @include media-small {
         width: 9vw;
         height: 9vw;
     }
@@ -195,7 +195,7 @@
     transform: matrix(1, 0, 0, 1, 0, 0);
     transition: bottom .1s linear;
 
-    @include media-medium {
+    @include media-small {
         width: 14vw;
         min-height: 9vw;
     }
@@ -224,7 +224,7 @@
         bottom: 45%;
         left: 23%;
 
-        @include media-medium {
+        @include media-small {
             left: 15%;
         }
 
@@ -235,7 +235,7 @@
         &:nth-last-child(2) {
             bottom: calc(4vw + 55%);
 
-            @include media-medium {
+            @include media-small {
                 bottom: calc(9vw + 40%);
             }
         }
