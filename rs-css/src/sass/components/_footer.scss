@@ -7,6 +7,10 @@
     padding: 10px 0;
     flex-basis: 10%;
 
+    @include media-extra-small {
+        font-size: 1.2rem;
+    }
+
     &>:first-child {
         padding-left: 20px;
     }
@@ -22,6 +26,10 @@
 
     & img {
         height: 30px;
+
+        @include media-extra-small {
+            height: 15px;
+        }
     }
 
     & a {

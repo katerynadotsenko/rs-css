@@ -81,9 +81,17 @@ h4 {
     overflow: hidden;
     z-index: 10;
 
+    @include media-extra-small {
+        width: 100vw;
+    }
+
     &.active {
         position: static;
         right: 0;
+
+        @include media-small {
+            position: fixed;
+        }
     }
 }
 
