@@ -13,7 +13,7 @@ function tooltipShow(element, node) {
 
     const coords = element.getBoundingClientRect();
 
-    const tooltipTop = `${coords.top - coords.height * 0.2}px`;
+    const tooltipTop = `${coords.top - 50}px`;
     const tooltipLeft = `${coords.left}px`;
     
     tooltip.style.top = tooltipTop;
