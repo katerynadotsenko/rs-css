@@ -105,7 +105,11 @@ export default class NavigationComponent {
             case 'toggle-level-list':
                 buttonElement.addEventListener('click', () => {
                     const levelsNavigation = document.querySelector('.levels-navigation');
+                    const levelPanel = document.querySelector('.level-panel');
+
+                    levelPanel.classList.toggle('active');
                     levelsNavigation.classList.toggle('active');
+
                     if (levelsNavigation.classList.contains('active')) {
                         buttonElement.innerText = 'show description';
                     } else {

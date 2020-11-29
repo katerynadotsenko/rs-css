@@ -1,3 +1,15 @@
+.button {
+  background-color: transparent;
+  border: 2px solid #3a3938;
+  color: #a0a0a0;
+  font-size: 1.8rem;
+  line-height: 4rem;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #272727;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -708,11 +720,15 @@ tag {
 }
 
 .level-panel {
-  flex-grow: 1;
+  height: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  overflow: hidden;
+}
+.level-panel.active {
+  flex-grow: 1;
   padding: 5px;
 }
 .level-panel__header {
@@ -735,22 +751,12 @@ tag {
 .description__example {
   padding-bottom: 8px;
 }
-.description__help {
-  background-color: transparent;
-  border: 2px solid #3a3938;
-  color: #a0a0a0;
-  font-size: 1.8rem;
-  line-height: 4rem;
-  cursor: pointer;
-}
-.description__help:hover {
-  background-color: #272727;
-}
 
 .levels-navigation {
   height: 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   overflow: hidden;
   transition: 0.2s linear;
 }

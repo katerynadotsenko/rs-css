@@ -7,6 +7,7 @@ export default class LevelPanelComponent {
     render() {
         const levelPanel = document.createElement('div');
         levelPanel.classList.add('level-panel');
+        levelPanel.classList.add('active');
 
         levelPanel.append(this.generateLevelDescriptionView(this.levelDescription));
         levelPanel.append(this.generateHelpButton());
@@ -16,7 +17,7 @@ export default class LevelPanelComponent {
 
     generateHelpButton() {
         const helpButton = document.createElement('button');
-        helpButton.classList.add('description__help');
+        helpButton.classList.add('button');
         helpButton.innerText = 'Help';
 
         helpButton.addEventListener('click', () => {

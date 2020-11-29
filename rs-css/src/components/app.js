@@ -33,7 +33,8 @@ export default class App {
         this.navigationComponent = new NavigationComponent(this.level, this.maxLevel, (level) => this.changeLevel(level), 
                                                                 (level) => this.checkIsLevelDone(level), (level) => this.checkIsUsedHelp(level));
         this.levelNavigationComponent = new LevelNavigationComponent(this.level, levelsData, (level) => this.checkIsLevelDone(level), 
-                                                                    (level) => this.checkIsUsedHelp(level), (level) => this.changeLevel(level));
+                                                                    (level) => this.checkIsUsedHelp(level), (level) => this.changeLevel(level),
+                                                                    () => this.resetProgress());
         this.footerComponent = new FooterComponent();
     }
 
@@ -69,6 +70,16 @@ export default class App {
         cssPanelInput.focus();
     }
 
+    resetProgress() {
+        this.service.clearData();
+        const currentLevel = 1;
+        this.progress = [];
+        
+        this.changeLevel(currentLevel);
+        this.levelNavigationComponent.resetNavigationLevelList();
+        this.navigationComponent.updateNavigationLevel(currentLevel);
+    }
+
     setRightPanelMode() {
         const windowSize = window.innerWidth;
 
@@ -100,9 +111,9 @@ export default class App {
     }
 
     checkIsAllLevelsDone() {
-        const levelsNotDone = this.progress.filter(level => level.isDone === false);
+        const levelsDone = this.progress.filter(level => level.isDone === true);
 
-        return levelsNotDone.length ? false : true;
+        return levelsDone.length === levelsData.length ? true : false;
     }
 
     checkIsLevelDone(level) {

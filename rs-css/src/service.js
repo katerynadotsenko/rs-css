@@ -37,4 +37,9 @@ export default class Service {
     setCurrentLevel(currentLevel) {
         localStorage.setItem('currentLevelBirds', currentLevel);
     }
+
+    clearData() {
+        localStorage.removeItem("currentLevelBirds");
+        localStorage.removeItem("progressBirds");
+    }
 }

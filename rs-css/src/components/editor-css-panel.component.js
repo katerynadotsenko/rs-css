@@ -98,7 +98,7 @@ export default class EditorCssPanelComponent {
         [...this.answer[1]].forEach((letter, i) => {
             setTimeout(() => {
                 cssPanelInput.value += letter;
-            }, 200 * i);
+            }, 100 * i);
         });
     }
 
@@ -132,7 +132,7 @@ export default class EditorCssPanelComponent {
 
                     setTimeout(() => {
                         const isAllLevelsDone = this.checkIsAllLevelsDone();
-                        
+
                         if (this.level < this.maxLevel && !isAllLevelsDone) {
                             this.changeLevel(this.level + 1);
                             cssPanelInput.classList.add('highlighting');

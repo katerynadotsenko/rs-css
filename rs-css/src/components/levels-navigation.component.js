@@ -1,10 +1,11 @@
 export default class LevelNavigationComponent {
-    constructor(level, levelsData, checkIsLevelDone, checkIsUsedHelp, changeLevel) {
+    constructor(level, levelsData, checkIsLevelDone, checkIsUsedHelp, changeLevel, resetProgress) {
         this.level = level;
         this.levelsData = levelsData;
         this.checkIsLevelDone = checkIsLevelDone;
         this.checkIsUsedHelp = checkIsUsedHelp;
         this.changeLevel = changeLevel;
+        this.resetProgress = resetProgress;
     }
 
     render() {
@@ -12,12 +13,14 @@ export default class LevelNavigationComponent {
         levelsNavigation.classList.add('levels-navigation');
 
         levelsNavigation.append(this.generateLevelsList());
+        levelsNavigation.append(this.generateResetProgressButton());
 
         return levelsNavigation;
     }
 
     generateLevelsList() {
-        let fragment = document.createDocumentFragment();
+        let levelsNavigationContainer = document.createElement('div');
+        levelsNavigationContainer.classList.add('levels-navigation__container');
 
         this.levelsData.forEach(level => {
             const isDone = this.checkIsLevelDone(level.level);
@@ -45,14 +48,26 @@ export default class LevelNavigationComponent {
                 this.changeLevel(level.level);
             });
 
-            fragment.append(levelsNavigationItem);
+            levelsNavigationContainer.append(levelsNavigationItem);
         });
 
-        return fragment;
+        return levelsNavigationContainer;
+    }
+
+    generateResetProgressButton() {
+        const resetProgressButton = document.createElement('button');
+        resetProgressButton.classList.add('button');
+        resetProgressButton.innerText = 'Reset Progress';
+
+        resetProgressButton.addEventListener('click', () => {
+            this.resetProgress();
+        });
+
+        return resetProgressButton;
     }
 
     updateActiveLevel(level) {
-        const levelsNavigationItems = document.querySelector('.levels-navigation').childNodes;
+        const levelsNavigationItems = document.querySelector('.levels-navigation__container').childNodes;
 
         levelsNavigationItems[this.level - 1].classList.remove('active');
         levelsNavigationItems[level - 1].classList.add('active');
@@ -62,13 +77,21 @@ export default class LevelNavigationComponent {
 
     updateLevelStatus(level, isDone, isWithHelp) {
         if (isDone) {
-            const levelToUpdateDone = document.querySelectorAll('.levels-navigation .level__check')[level - 1];
+            const levelToUpdateDone = document.querySelectorAll('.levels-navigation__container .level__check')[level - 1];
             levelToUpdateDone.classList.add('done');
         }
 
         if (isWithHelp) {
-            const levelToUpdateWithHelp = document.querySelectorAll('.levels-navigation .level__with-help')[level - 1];
+            const levelToUpdateWithHelp = document.querySelectorAll('.levels-navigation__container .level__with-help')[level - 1];
             levelToUpdateWithHelp.classList.add('active');
         }
+    }
+
+    resetNavigationLevelList() {
+        const levelsNavigationItems = document.querySelector('.levels-navigation__container').childNodes;
+        levelsNavigationItems.forEach(item => {
+            item.querySelector('.level__check').classList.remove('done');
+            item.querySelector('.level__with-help').classList.remove('active');
+        });
     }
 }
