@@ -1,4 +1,4 @@
-import {tooltipShow, tooltipHide} from '../helpers/utils.js';
+import {showTooltip, hideTooltip} from '../helpers/utils.js';
 
 export default class EditorHtmlPanelComponent {
     constructor(nodes) {
@@ -139,7 +139,7 @@ export default class EditorHtmlPanelComponent {
             elementInGame.classList.add('hovered');
             element.classList.add('hovered');
 
-            tooltipShow(elementInGame, childNode);
+            showTooltip(elementInGame, childNode);
 
         });
 
@@ -156,7 +156,7 @@ export default class EditorHtmlPanelComponent {
             elementInGame.classList.remove('hovered');
             element.classList.remove('hovered');
 
-            tooltipHide();
+            hideTooltip();
 
         });
     }

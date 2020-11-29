@@ -1,4 +1,4 @@
-function tooltipShow(element, node) {
+function showTooltip (element, node) {
     const tooltip = document.createElement('div');
     tooltip.classList.add('tooltip');
 
@@ -22,11 +22,40 @@ function tooltipShow(element, node) {
     document.body.append(tooltip);
 }
 
-function tooltipHide() {
+function hideTooltip() {
     const tooltip = document.querySelector('.tooltip');
     if (tooltip) {
         tooltip.remove();
     }
 }
 
-export {tooltipShow, tooltipHide};
+function showNotification() {
+    const notification = document.createElement('div');
+    notification.classList.add('notification');
+
+    const notificationWindow = document.createElement('div');
+    notificationWindow.classList.add('notification__window');
+
+    notificationWindow.innerHTML = `<div class="notification__header">
+                                        Congratulations!
+                                    </div>
+                                    <div class="notification__content">
+                                        You have successfully completed all levels
+                                    </div>`;
+
+    const notificationButton = document.createElement('button');
+    notificationButton.classList.add('notification__button');
+    notificationButton.innerText = 'Cool!';
+
+    notificationButton.addEventListener('click', () => {
+        notification.remove();
+    });
+
+    notificationWindow.append(notificationButton);
+
+    notification.append(notificationWindow);
+
+    document.body.append(notification);
+}
+
+export {showTooltip, hideTooltip, showNotification};

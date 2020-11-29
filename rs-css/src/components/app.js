@@ -11,6 +11,7 @@ import levelsData from '../data/levels.data.js';
 import Service from '../service.js';
 
 //TODO shadow bg (menu) for devices
+//TODO change bird width foe correct hover
 
 export default class App {
     constructor() {
@@ -20,13 +21,16 @@ export default class App {
 
         this.progress = this.service.getProgress();
         this.level = this.service.getCurrentLevel();
+        this.maxLevel = levelsData.length;
 
         this.taskComponent = new TaskComponent(levelsData[this.level - 1].task);
         this.gameComponent = new GameComponent(levelsData[this.level - 1].nodes);
         this.editorComponent = new EditorComponent(this.level, levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer, 
-                                                        (level, isDone, isWithHelp) => this.updateProgress(level, isDone, isWithHelp), (level) => this.changeLevel(level));
+                                                        (level, isDone, isWithHelp) => this.updateProgress(level, isDone, isWithHelp), 
+                                                        (level) => this.changeLevel(level), this.maxLevel,
+                                                        () => this.checkIsAllLevelsDone());
         this.levelPanelComponent = new LevelPanelComponent(levelsData[this.level - 1], () => this.writeAnswer());
-        this.navigationComponent = new NavigationComponent(this.level, levelsData.length, (level) => this.changeLevel(level), 
+        this.navigationComponent = new NavigationComponent(this.level, this.maxLevel, (level) => this.changeLevel(level), 
                                                                 (level) => this.checkIsLevelDone(level), (level) => this.checkIsUsedHelp(level));
         this.levelNavigationComponent = new LevelNavigationComponent(this.level, levelsData, (level) => this.checkIsLevelDone(level), 
                                                                     (level) => this.checkIsUsedHelp(level), (level) => this.changeLevel(level));
@@ -93,6 +97,12 @@ export default class App {
         this.progress = this.service.getProgress();
         this.navigationComponent.updateNavigationLevel(level);
         this.levelNavigationComponent.updateLevelStatus(level, isDone, isWithHelp);
+    }
+
+    checkIsAllLevelsDone() {
+        const levelsNotDone = this.progress.filter(level => level.isDone === false);
+
+        return levelsNotDone.length ? false : true;
     }
 
     checkIsLevelDone(level) {

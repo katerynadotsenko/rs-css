@@ -1,4 +1,4 @@
-import {tooltipShow, tooltipHide} from '../helpers/utils.js';
+import {showTooltip, hideTooltip} from '../helpers/utils.js';
 
 export default class GameComponent {
     constructor(nodes) {
@@ -91,7 +91,7 @@ export default class GameComponent {
             elementInHtml.classList.add('hovered');
             element.classList.add('hovered');
 
-            tooltipShow(element, childNode);
+            showTooltip(element, childNode);
 
         });
 
@@ -108,7 +108,7 @@ export default class GameComponent {
             elementInHtml.classList.remove('hovered');
             element.classList.remove('hovered');
 
-            tooltipHide();
+            hideTooltip();
 
         });
     }

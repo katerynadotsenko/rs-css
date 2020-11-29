@@ -1,9 +1,13 @@
+import {showNotification} from '../helpers/utils.js';
+
 export default class EditorCssPanelComponent {
-    constructor(level, answer, updateProgress, changeLevel) {
+    constructor(level, answer, updateProgress, changeLevel, maxLevel, checkIsAllLevelsDone) {
         this.level = level;
+        this.maxLevel = maxLevel;
         this.answer = answer;
         this.updateProgress = updateProgress;
         this.changeLevel = changeLevel;
+        this.checkIsAllLevelsDone = checkIsAllLevelsDone;
         this.isWithHelp = false;
     }
 
@@ -127,8 +131,14 @@ export default class EditorCssPanelComponent {
                     cssPanelInput.value = '';
 
                     setTimeout(() => {
-                        this.changeLevel(this.level + 1);
-                        cssPanelInput.classList.add('highlighting');
+                        const isAllLevelsDone = this.checkIsAllLevelsDone();
+                        
+                        if (this.level < this.maxLevel && !isAllLevelsDone) {
+                            this.changeLevel(this.level + 1);
+                            cssPanelInput.classList.add('highlighting');
+                        } else if (isAllLevelsDone) {
+                            showNotification();
+                        }
                     }, 1000)
                 
 

@@ -2,9 +2,9 @@ import EditorCssPanelComponent from './editor-css-panel.component.js';
 import EditorHtmlPanelComponent from './editor-html-panel.component.js';
 
 export default class EditorComponent {
-    constructor(level, nodes, answer, updateProgress, changeLevel) {
+    constructor(level, nodes, answer, updateProgress, changeLevel, maxLevel, checkIsAllLevelsDone) {
         this.nodes = nodes;
-        this.editorCssPanelComponent = new EditorCssPanelComponent(level, answer, updateProgress, changeLevel);
+        this.editorCssPanelComponent = new EditorCssPanelComponent(level, answer, updateProgress, changeLevel, maxLevel, checkIsAllLevelsDone);
         this.editorHtmlPanelComponent = new EditorHtmlPanelComponent(nodes);
     }
 
