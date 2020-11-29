@@ -41,17 +41,16 @@ function showNotification() {
                                     </div>
                                     <div class="notification__content">
                                         You have successfully completed all levels
-                                    </div>`;
+                                    </div>
+                                    <button class="notification__button">
+                                        Cool!
+                                    </button>`;
 
-    const notificationButton = document.createElement('button');
-    notificationButton.classList.add('notification__button');
-    notificationButton.innerText = 'Cool!';
-
-    notificationButton.addEventListener('click', () => {
-        notification.remove();
+    notification.addEventListener('click', (e) => {
+        if (e.target.classList.contains('notification') || e.target.classList.contains('notification__button')) {
+            notification.remove();
+        }
     });
-
-    notificationWindow.append(notificationButton);
 
     notification.append(notificationWindow);
 
