@@ -11,7 +11,6 @@ import levelsData from '../data/levels.data.js';
 import Service from '../service.js';
 
 //TODO shadow bg (menu) for devices
-//TODO change bird width foe correct hover
 
 export default class App {
     constructor() {

@@ -58,6 +58,34 @@ const levelsData = [
         nodes: ['branch', 
             [
                 {
+                    type:'house',
+                    id: 'blue-house'
+                },
+                {
+                    type:'bird'
+                },
+                {
+                    type:'house',
+                    className: ['dance'],
+                    id: 'green-house'
+                }
+            ]
+        ],
+        task: 'Select the green house',
+        description: {
+            selectorName: 'ID Selector',
+            title: 'Select elements with an ID',
+            syntax: '#id',
+            hint: 'Selects the element with a specific id. You can also combine the ID selector with the type selector.',
+            examples: ['<tag>#cool</tag> selects any element with <tag>id="cool"</tag>', '<tag>ul#long</tag> selects <tag>&lt;ul id="long"&gt;</tag>']
+        },
+        answer: [1, '#green-house']
+    },
+    {
+        level: 4,
+        nodes: ['branch', 
+            [
+                {
                     type:'bird',
                     className: ['blue']
                 }, 
@@ -92,7 +120,7 @@ const levelsData = [
         answer: [1, 'egg:first-child']
     },
     {
-        level: 4,
+        level: 5,
         nodes: ['branch', 
             [
                 {
@@ -134,7 +162,7 @@ const levelsData = [
     }
     ,
     {
-        level: 5,
+        level: 6,
         nodes: ['branch', 
             [
                 [

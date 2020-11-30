@@ -65,6 +65,10 @@ export default class GameComponent {
             childElement.classList.add(...childNode.className);
         }
 
+        if (childNode.id) {
+            childElement.id = childNode.id;
+        }
+
         this.bindListeners(childElement, parentNode, childNode, nodePosition);
 
         parentNode.append(childElement);

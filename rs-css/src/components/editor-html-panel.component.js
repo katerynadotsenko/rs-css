@@ -111,6 +111,14 @@ export default class EditorHtmlPanelComponent {
             }
         }
 
+        if (childNode.id) {
+            fragment.append(this.highlightWrapper(' id', 'highlight_id'));
+            fragment.append(this.highlightWrapper('="', 'text'));
+            
+            fragment.append(this.highlightWrapper(`${childNode.id}`, 'highlight_id-name'));
+            fragment.append(this.highlightWrapper('"', 'text'));
+        }
+
         const closeTag = isCloseTag ? ` />` : '>';
         fragment.append(this.highlightWrapper(closeTag, 'text'));
 

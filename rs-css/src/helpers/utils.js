@@ -3,14 +3,18 @@ function showTooltip (element, node) {
     const tooltip = document.querySelector('.tooltip');
     tooltip.style.display = 'block';
 
-    let classesContent = '';
+    let stylesContent = '';
 
     if (node.className) {
         const classes = node.className.filter(item => item !== 'dance');
-        classesContent += classes.length ? ` class="${classes.join(' ')}"` : '';
+        stylesContent += classes.length ? ` class="${classes.join(' ')}"` : '';
     }
 
-    tooltip.innerText = `<${node.type + classesContent}></${node.type}>`;
+    if (node.id) {
+        stylesContent += ` id="${node.id}"`;
+    }
+
+    tooltip.innerText = `<${node.type + stylesContent}></${node.type}>`;
 
     const coords = element.getBoundingClientRect();
 
