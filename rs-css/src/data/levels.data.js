@@ -340,6 +340,288 @@ const levelsData = [
                         '<tag>ul li:only-child</tag> selects the only <tag>&lt;li&gt;</tag> element that are in a <tag>&lt;ul&gt;</tag>.']
         },
         answer: [2, 'nest *:only-child']
+    },
+    {
+        level: 10,
+        nodes: ['branch', 
+            [
+                [
+                    {
+                        type:'house',
+                        className: ['dance'],
+                        id: 'green-house'
+                    },
+                    [
+                        {
+                            type:'bird',
+                            className: ['dance', 'yellow']
+                        }
+                    ]
+                ], 
+                {
+                    type:'bird',
+                    className: ['dance', 'red']
+                },
+                [
+                    {
+                        type:'nest',
+                        className: ['dance']
+                    },
+                    [
+                        {
+                            type:'bird',
+                            className: ['dance']
+                        }
+                    ]
+                ],
+                [
+                    {
+                        type:'nest',
+                        className: ['dance']
+                    },
+                    [
+                        {
+                            type:'egg',
+                            className: ['dance', 'green']
+                        }
+                    ]
+                ]
+            ]
+        ],
+        task: 'Select all the elements!',
+        description: {
+            selectorName: 'The Universal Selector',
+            title: 'You can select everything!',
+            syntax: '*',
+            hint: 'You can select all elements with the universal selector!',
+            examples: ['<tag>p *</tag> selects any element inside all p elements.']
+        },
+        answer: [7, '*']
+    },
+    {
+        level: 11,
+        nodes: ['branch', 
+            [ 
+                {
+                    type:'bird',
+                    className: ['red']
+                },
+                [
+                    {
+                        type:'nest'
+                    },
+                    [
+                        {
+                            type:'bird',
+                            className: ['dance']
+                        }
+                    ]
+                ],
+                {
+                    type:'house',
+                    id: 'blue-house'
+                },
+                [
+                    {
+                        type:'nest'
+                    },
+                    [
+                        {
+                            type:'egg',
+                            className: ['dance', 'red']
+                        }
+                    ]
+                ]
+            ]
+        ],
+        task: 'Select everything on a nest',
+        description: {
+            selectorName: 'The Universal Selector',
+            title: 'Combine the Universal Selector',
+            syntax: 'X  *',
+            hint: 'This selects all elements inside of <tag>X</tag>.!',
+            examples: ['<tag>ul.fancy *</tag> selects every element inside all ul class="fancy" elements.']
+        },
+        answer: [2, 'nest *']
+    },
+    {
+        level: 12,
+        nodes: ['branch', 
+            [ 
+                [
+                    {
+                        type:'nest'
+                    },
+                    [
+                        {
+                            type:'bird',
+                            className: ['blue']
+                        }
+                    ]
+                ],
+                {
+                    type:'bird',
+                    className: ['dance']
+                },
+                {
+                    type:'bird',
+                    className: ['yellow']
+                },
+                [
+                    {
+                        type:'nest'
+                    },
+                    [
+                        {
+                            type:'egg',
+                            className: ['red']
+                        }
+                    ]
+                ],
+                {
+                    type:'bird',
+                    className: ['dance', 'orange']
+                }
+            ]
+        ],
+        task: 'Select every bird that\'s next to a nest',
+        description: {
+            selectorName: 'Adjacent Sibling Selector',
+            title: 'Select an element that directly follows another element',
+            syntax: 'X + Y',
+            hint: 'This selects all <tag>Y</tag> elements that directly follow <tag>X</tag>. Elements that follow one another are called siblings. They\'re on the same level, or depth. In the HTML markup for this level, elements that have the same indentation are siblings.',
+            examples: ['<tag>p + .intro</tag> selects every element with <tag>class="intro"</tag> that directly follows a <tag>p</tag>']
+        },
+        answer: [2, 'nest + bird']
+    },
+    {
+        level: 13,
+        nodes: ['branch', 
+            [ 
+                {
+                    type:'bird',
+                    className: ['yellow']
+                },
+                {
+                    type:'egg',
+                    className: ['dance', 'purple']
+                },
+                {
+                    type:'egg',
+                    className: ['dance', 'red']
+                },
+                {
+                    type:'bird',
+                    className: ['orange']
+                },
+                {
+                    type:'egg',
+                    className: ['dance', 'green']
+                },
+                [
+                    {
+                        type:'nest'
+                    },
+                    [
+                        {
+                            type:'egg',
+                            className: ['pink']
+                        }
+                    ]
+                ]
+            ]
+        ],
+        task: 'Select the eggs beside the bird',
+        description: {
+            selectorName: 'General Sibling Selector',
+            title: 'Select elements that follows another element',
+            syntax: 'X ~ Y',
+            hint: 'You can select all siblings of an element that follow it. This is like the Adjacent Selector (X + Y) except it gets all of the following elements instead of one.',
+            examples: ['<tag>X ~ Y</tag> selects all <tag>Y</tag> that follow a <tag>X</tag>']
+        },
+        answer: [3, 'bird ~ egg']
+    },
+    {
+        level: 14,
+        nodes: ['branch', 
+            [ 
+                [
+                    {
+                        type:'house',
+                        id: ['green-house']
+                    },
+                    [
+                        {
+                            type:'bird',
+                            className: ['dance', 'yellow']
+                        }
+                    ]
+                ],
+                {
+                    type:'bird',
+                    className: ['yellow']
+                },
+                [
+                    {
+                        type:'house',
+                        id: ['blue-house']
+                    },
+                    [
+                        {
+                            type:'bird',
+                            className: ['dance', 'yellow']
+                        }
+                    ]
+                ]
+            ]
+        ],
+        task: 'Select the bird directly in a house',
+        description: {
+            selectorName: 'Child Selector',
+            title: 'Select direct children of an element',
+            syntax: 'X > Y',
+            hint: 'You can select elements that are direct children of other elements. A child element is any element that is nested directly in another element. Elements that are nested deeper than that are called descendant elements.',
+            examples: ['<tag>X > Y</tag> selects all <tag>Y</tag> that are a direct children <tag>X</tag>']
+        },
+        answer: [2, 'house > bird']
+    },
+    {
+        level: 15,
+        nodes: ['branch', 
+            [ 
+                {
+                    type:'egg',
+                    className: ['dance', 'pink']
+                },
+                {
+                    type:'house',
+                    className: ['dance'],
+                    id: ['green-house']
+                },
+                {
+                    type:'bird',
+                    className: ['red']
+                },
+                {
+                    type:'bird',
+                    className: ['dance', 'yellow']
+                },
+                {
+                    type:'egg',
+                    className: ['red']
+                }
+            ]
+        ],
+        task: 'Select elements that are not red',
+        description: {
+            selectorName: 'Negation Pseudo-class',
+            title: 'Select all elements that don\'t match the negation selector',
+            syntax: ':not(X)',
+            hint: 'You can use this to select all elements that do not match selector <tag>"X"</tag>.',
+            examples: ['<tag>:not(#fancy)</tag> selects all elements that do not have id="fancy".',
+                        '<tag>:not(.big, .medium)</tag> selects all elements that do not have <tag>class="big"</tag> or <tag>class="medium"</tag>.']
+        },
+        answer: [3, '*:not(.red)']
     }
 ];
 
