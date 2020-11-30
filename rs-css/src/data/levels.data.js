@@ -31,6 +31,45 @@ const levelsData = [
         level: 2,
         nodes: ['branch', 
             [
+                [
+                    {
+                        type:'house',
+                        id: ['purple-house']
+                    },
+                    [
+                        {
+                            type:'bird',
+                            className: ['dance', 'pink']
+                        }
+                    ]
+                ], 
+                [
+                    {
+                        type:'nest'
+                    },
+                    [
+                        {
+                            type:'bird',
+                            className: ['pink']
+                        }
+                    ]
+                ]
+            ]
+        ],
+        task: 'Select the bird in the house',
+        description: {
+            selectorName: 'Descendant Selector',
+            title: 'Select an element inside another element',
+            syntax: 'X Y',
+            hint: 'Selects all <tag>Y</tag> inside of <tag>X</tag>. <tag>Y</tag> is called a descendant because it is inside of another element.',
+            examples: ['<tag>p strong</tag> selects all <tag>strong</tag> elements that are inside of any <tag>p</tag>']
+        },
+        answer: [1, 'house bird']
+    },
+    {
+        level: 3,
+        nodes: ['branch', 
+            [
                 {
                     type:'bird',
                     className: ['dance', 'red']
@@ -54,7 +93,7 @@ const levelsData = [
         answer: [1, '.red']
     },
     {
-        level: 3,
+        level: 4,
         nodes: ['branch', 
             [
                 {
@@ -82,7 +121,7 @@ const levelsData = [
         answer: [1, '#green-house']
     },
     {
-        level: 4,
+        level: 5,
         nodes: ['branch', 
             [
                 {
@@ -120,7 +159,7 @@ const levelsData = [
         answer: [1, 'egg:first-child']
     },
     {
-        level: 5,
+        level: 6,
         nodes: ['branch', 
             [
                 {
@@ -161,7 +200,7 @@ const levelsData = [
         answer: [1, 'egg:nth-child(5)']
     },
     {
-        level: 6,
+        level: 7,
         nodes: ['branch', 
             [
                 {
@@ -197,7 +236,7 @@ const levelsData = [
         answer: [2, 'bird:nth-child(even)']
     },
     {
-        level: 7,
+        level: 8,
         nodes: ['branch', 
             [
                 [
@@ -246,7 +285,7 @@ const levelsData = [
         answer: [3, 'nest bird:nth-child(odd)']
     },
     {
-        level: 8,
+        level: 9,
         nodes: ['branch', 
             [
                 {
@@ -286,7 +325,7 @@ const levelsData = [
         answer: [2, 'bird:nth-child(3n+0)']
     },
     {
-        level: 9,
+        level: 10,
         nodes: ['branch', 
             [
                 [
@@ -342,7 +381,7 @@ const levelsData = [
         answer: [2, 'nest *:only-child']
     },
     {
-        level: 10,
+        level: 11,
         nodes: ['branch', 
             [
                 [
@@ -399,7 +438,7 @@ const levelsData = [
         answer: [7, '*']
     },
     {
-        level: 11,
+        level: 12,
         nodes: ['branch', 
             [ 
                 {
@@ -445,7 +484,7 @@ const levelsData = [
         answer: [2, 'nest *']
     },
     {
-        level: 12,
+        level: 13,
         nodes: ['branch', 
             [ 
                 [
@@ -495,7 +534,7 @@ const levelsData = [
         answer: [2, 'nest + bird']
     },
     {
-        level: 13,
+        level: 14,
         nodes: ['branch', 
             [ 
                 {
@@ -542,7 +581,7 @@ const levelsData = [
         answer: [3, 'bird ~ egg']
     },
     {
-        level: 14,
+        level: 15,
         nodes: ['branch', 
             [ 
                 [
@@ -586,7 +625,7 @@ const levelsData = [
         answer: [2, 'house > bird']
     },
     {
-        level: 15,
+        level: 16,
         nodes: ['branch', 
             [ 
                 {
@@ -622,6 +661,155 @@ const levelsData = [
                         '<tag>:not(.big, .medium)</tag> selects all elements that do not have <tag>class="big"</tag> or <tag>class="medium"</tag>.']
         },
         answer: [3, '*:not(.red)']
+    },
+    {
+        level: 17,
+        nodes: ['branch', 
+            [ 
+                {
+                    type:'house',
+                    className: ['dance'],
+                    id: ['green-house']
+                },
+                [
+                    {
+                        type:'house',
+                        id: ['purple-house']
+                    },
+                    [
+                        {
+                            type:'bird',
+                            className: ['pink']
+                        }
+                    ]
+                ],
+                {
+                    type:'house',
+                    className: ['dance'],
+                    id: ['blue-house']
+                },
+                {
+                    type:'bird',
+                    className: ['yellow']
+                }
+            ]
+        ],
+        task: 'Select the empty houses',
+        description: {
+            selectorName: 'Empty Selector',
+            title: 'Select elements that don\'t have children',
+            syntax: ':empty',
+            hint: 'Selects elements that don\'t have any other elements inside of them.',
+            examples: ['<tag>div:empty</tag> selects all empty div elements.']
+        },
+        answer: [2, 'house:empty']
+    },
+    {
+        level: 18,
+        nodes: ['branch', 
+            [ 
+                {
+                    type:'bird',
+                    className: ['blue']
+                },
+                {
+                    type:'bird',
+                    className: ['dance', 'yellow'],
+                    attributeName: 'Leila'
+                },
+                {
+                    type:'bird',
+                    className: ['dance', 'pink'],
+                    attributeName: 'Ricky'
+                },
+                {
+                    type:'bird',
+                    className: ['red']
+                }
+            ]
+        ],
+        task: 'Select the birds with name',
+        description: {
+            selectorName: 'Attribute Selector',
+            title: 'Select all elements that have a specific attribute',
+            syntax: '[attribute]',
+            hint: 'Attributes appear inside the opening tag of an element, like this: <tag>span attribute="value"</tag>. An attribute does not always have a value, it can be blank!',
+            examples: ['<tag>a[href]</tag> selects all <tag>a</tag> elements that have a <tag>href="anything"</tag> attribute.',
+                        '<tag>[type]</tag> selects all elements that have a <tag>type="anything"</tag> attribute.']
+        },
+        answer: [2, '[name]']
+    },
+    {
+        level: 19,
+        nodes: ['branch', 
+            [ 
+                {
+                    type:'bird',
+                    className: ['blue'],
+                    attributeName: 'Rita'
+                },
+                {
+                    type:'bird',
+                    className: ['yellow'],
+                    attributeName: 'Leila'
+                },
+                {
+                    type:'bird',
+                    className: ['pink'],
+                    attributeName: 'Ricky'
+                },
+                {
+                    type:'bird',
+                    className: ['dance', 'red'],
+                    attributeName: 'Kesha'
+                }
+            ]
+        ],
+        task: 'Select the bird with Kesha name',
+        description: {
+            selectorName: 'Attribute Value Selector',
+            title: 'Select all elements that have a specific attribute value',
+            syntax: '[attribute="value"]',
+            hint: 'Attribute selectors are case sensitive, each character must match exactly.',
+            examples: ['<tag>input[type="checkbox"]</tag> selects all checkbox input elements.']
+        },
+        answer: [1, '[name="Kesha"]']
+    },
+    {
+        level: 20,
+        nodes: ['branch', 
+            [ 
+                {
+                    type:'bird',
+                    className: ['dance', 'blue'],
+                    attributeName: 'Rita'
+                },
+                {
+                    type:'bird',
+                    className: ['yellow'],
+                    attributeName: 'Leila'
+                },
+                {
+                    type:'bird',
+                    className: ['dance', 'pink'],
+                    attributeName: 'Ricky'
+                },
+                {
+                    type:'bird',
+                    className: ['red'],
+                    attributeName: 'Kesha'
+                }
+            ]
+        ],
+        task: 'Select the bird names that start with \'Ri\'',
+        description: {
+            selectorName: 'Attribute Starts With Selector',
+            title: 'Select all elements with an attribute value that starts with specific characters',
+            syntax: '[attribute^="value"]',
+            hint: '',
+            examples: ['<tag>.toy[category^="Swim"]</tag> selects elements with class <tag>toy</tag> and either <tag>category="Swimwear</tag> or <tag>category="Swimming"</tag>.']
+        },
+        answer: [2, '[name^="Ri"]']
     }
 ];
 

@@ -26,6 +26,20 @@
     }
 }
 
+@keyframes dance-large {
+    0% {
+        transform: skew(3deg, 1deg) scale(1, 1) translate(-2.5%, 0%);
+    }
+
+    50% {
+        transform: skew(0deg, 0deg) scale(1, .9) translate(0%, 6%);
+    }
+
+    100% {
+        transform: skew(-3deg, 1deg) scale(1, 1) translate(2.5%, 0%);
+    }
+}
+
 
 .game {
     width: 100%;
@@ -96,6 +110,11 @@
     animation: dance-medium .5s infinite alternate;
 }
 
+.game nest.dance,
+.game house.dance {
+    animation: dance-large .5s infinite alternate;
+}
+
 .game .fly {
     bottom: 60vh !important;
 }
@@ -129,6 +148,10 @@
         background-image: url('/src/assets/img/blue-birdhouse.png');
     }
 
+    &#purple-house:after {
+        background-image: url('/src/assets/img/purple-birdhouse.png');
+    }
+
     & bird {
         left: 27%;
         bottom: -5%;
@@ -137,6 +160,11 @@
     &#blue-house bird {
         left: 28.5%;
         bottom: -14%;
+    }
+
+    &#purple-house bird {
+        left: 27%;
+        bottom: -11%;
     }
 }
 
@@ -168,6 +196,106 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
+    }
+
+    &[name="Ricky"] {
+        &:before {
+            content: 'Ricky';
+            font-size: 2rem;
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px;
+            border-radius: 5px;
+            color: $color-dark;
+            background-color: $color-light-2;
+            z-index: 3;
+
+            @include media-medium {
+                font-size: 1.2rem;
+            }
+
+            @include media-small {
+                padding: 2px;
+                font-size: 1rem;
+            }
+        }
+    }
+
+    &[name="Leila"] {
+        &:before {
+            content: 'Leila';
+            font-size: 2rem;
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px;
+            border-radius: 5px;
+            color: $color-dark;
+            background-color: $color-light-2;
+            z-index: 3;
+
+            @include media-medium {
+                font-size: 1.2rem;
+            }
+
+            @include media-small {
+                padding: 2px;
+                font-size: 1rem;
+            }
+        }
+    }
+
+    &[name="Kesha"] {
+        &:before {
+            content: 'Kesha';
+            font-size: 2rem;
+            position: absolute;
+            bottom: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px;
+            border-radius: 5px;
+            color: $color-dark;
+            background-color: $color-light-2;
+            z-index: 3;
+
+            @include media-medium {
+                font-size: 1.2rem;
+            }
+
+            @include media-small {
+                padding: 2px;
+                font-size: 1rem;
+            }
+        }
+    }
+
+    &[name="Rita"] {
+        &:before {
+            content: 'Rita';
+            font-size: 2rem;
+            position: absolute;
+            bottom: 40%;
+            left: 60%;
+            transform: translateX(-50%);
+            padding: 5px;
+            border-radius: 5px;
+            color: $color-dark;
+            background-color: $color-light-2;
+            z-index: 3;
+
+            @include media-medium {
+                font-size: 1.2rem;
+            }
+
+            @include media-small {
+                padding: 2px;
+                font-size: 1rem;
+            }
+        }
     }
 
     &.red {

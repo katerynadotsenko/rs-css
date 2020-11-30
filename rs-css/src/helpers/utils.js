@@ -14,6 +14,10 @@ function showTooltip (element, node) {
         stylesContent += ` id="${node.id}"`;
     }
 
+    if (node.attributeName) {
+        stylesContent += ` name="${node.attributeName}"`;
+    }
+
     tooltip.innerText = `<${node.type + stylesContent}></${node.type}>`;
 
     const coords = element.getBoundingClientRect();

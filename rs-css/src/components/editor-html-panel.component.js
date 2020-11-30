@@ -119,6 +119,14 @@ export default class EditorHtmlPanelComponent {
             fragment.append(this.highlightWrapper('"', 'text'));
         }
 
+        if (childNode.attributeName) {
+            fragment.append(this.highlightWrapper(' name', 'highlight_id'));
+            fragment.append(this.highlightWrapper('="', 'text'));
+            
+            fragment.append(this.highlightWrapper(`${childNode.attributeName}`, 'highlight_id-name'));
+            fragment.append(this.highlightWrapper('"', 'text'));
+        }
+
         const closeTag = isCloseTag ? ` />` : '>';
         fragment.append(this.highlightWrapper(closeTag, 'text'));
 
