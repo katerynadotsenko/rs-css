@@ -1,6 +1,7 @@
 function showTooltip (element, node) {
-    const tooltip = document.createElement('div');
-    tooltip.classList.add('tooltip');
+
+    const tooltip = document.querySelector('.tooltip');
+    tooltip.style.display = 'block';
 
     let classesContent = '';
 
@@ -18,15 +19,11 @@ function showTooltip (element, node) {
     
     tooltip.style.top = tooltipTop;
     tooltip.style.left = tooltipLeft;
-
-    document.body.append(tooltip);
 }
 
 function hideTooltip() {
     const tooltip = document.querySelector('.tooltip');
-    if (tooltip) {
-        tooltip.remove();
-    }
+    tooltip.style.display = 'none';
 }
 
 function showNotification() {

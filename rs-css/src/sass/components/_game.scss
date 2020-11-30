@@ -38,7 +38,7 @@
             left: 0;
             display: block;
             width: 100%;
-            height: 120%;
+            height: 135%;
             background-image: url('/src/assets/img/branch.png');
             background-repeat: no-repeat;
             background-position: 150% 100%;
@@ -62,8 +62,16 @@
     }
 }
 
-.game .hovered:after {
-    filter: brightness(130%);
+.game .hovered {
+    border: 3px solid rgb(252, 229, 177, .7);
+
+    @include media-small {
+        border: 2px solid rgb(252, 229, 177, .7);
+    }
+
+    &:after {
+        filter: brightness(130%);
+    }
 }
 
 .game .dance {
@@ -78,15 +86,17 @@
     position: relative;
     bottom: 0;
     display: inline-block;
-    width: 10vw;
+    width: 7vw;
     height: 10vw;
     transform: matrix(1, 0, 0, 1, 0, 0);
     transition: bottom .1s linear;
+    border: 3px solid transparent;
     z-index: 1;
 
     @include media-small {
-        width: 15vw;
+        width: 10.5vw;
         height: 15vw;
+        border: 2px solid transparent;
     }
 
     &:after {
@@ -104,11 +114,11 @@
 
 
     &.red {
-        width: 14vw;
+        width: 6vw;
         height: 14vw;
 
         @include media-small {
-            width: 19vw;
+            width: 8.14vw;
             height: 19vw;
         }
 
@@ -121,11 +131,11 @@
     }
 
     &.blue {
-        width: 14vw;
+        width: 9.5vw;
         height: 14vw;
 
         @include media-small {
-            width: 19vw;
+            width: 12.89vw;
             height: 19vw;
         }
 
@@ -142,15 +152,18 @@
     position: relative;
     bottom: 0;
     display: inline-block;
-    width: 5vw;
+    width: 4vw;
     height: 5vw;
     transform: matrix(1, 0, 0, 1, 0, 0);
     transition: bottom .1s linear;
+    margin: 0 5px;
+    border: 3px solid transparent;
     z-index: 1;
 
     @include media-small {
-        width: 9vw;
+        width: 7.2vw;
         height: 9vw;
+        border: 2px solid transparent;
     }
 
     &:after {
@@ -191,23 +204,26 @@
 .game nest {
     position: relative;
     width: 10vw;
-    min-height: 4vw;
+    min-height: 5vw;
+    margin-bottom: -2%;
     transform: matrix(1, 0, 0, 1, 0, 0);
+    border: 3px solid transparent;
     transition: bottom .1s linear;
 
     @include media-small {
         width: 14vw;
         min-height: 9vw;
+        border: 2px solid transparent;
     }
 
     &:after {
         content: '';
         position: absolute;
-        bottom: -50%;
+        bottom: 0;
         left: 0;
         display: block;
         width: 100%;
-        height: 180%;
+        height: 100%;
         background-image: url('/src/assets/img/nest.png');
         background-repeat: no-repeat;
         background-position: center;
@@ -216,12 +232,13 @@
 
     & bird {
         position: absolute;
-        bottom: 40%;
+        bottom: 50%;
+        left: 10%;
     }
 
     & egg {
         position: absolute;
-        bottom: 45%;
+        bottom: 50%;
         left: 23%;
 
         @include media-small {
@@ -229,14 +246,14 @@
         }
 
         &:nth-last-child(1) {
-            bottom: 45%;
+            bottom: 50%;
         }
 
         &:nth-last-child(2) {
-            bottom: calc(4vw + 55%);
+            bottom: calc(4vw + 50%);
 
             @include media-small {
-                bottom: calc(9vw + 40%);
+                bottom: calc(9vw + 30%);
             }
         }
     }

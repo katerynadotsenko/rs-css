@@ -39,6 +39,11 @@ export default class App {
     }
 
     init() {
+        const tooltip = document.createElement('div');
+        tooltip.classList.add('tooltip');
+
+        document.body.append(tooltip);
+
         const appContainer = document.querySelector('.app-container');
 
         const leftContainer = document.createElement('div');
