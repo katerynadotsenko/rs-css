@@ -159,10 +159,134 @@ const levelsData = [
                         '<tag>div p:nth-child(2)</tag> selects the second <tag>p</tag> in every <tag>div</tag>']
         },
         answer: [1, 'egg:nth-child(5)']
-    }
-    ,
+    },
     {
         level: 6,
+        nodes: ['branch', 
+            [
+                {
+                    type:'bird',
+                    className: ['yellow']
+                }, 
+                {
+                    type:'bird',
+                    className: ['dance','yellow']
+                }, 
+                {
+                    type:'bird',
+                    className: ['yellow']
+                }, 
+                {
+                    type:'bird',
+                    className: ['dance', 'yellow']
+                }, 
+                {
+                    type:'bird',
+                    className: ['yellow']
+                }
+            ]
+        ],
+        task: 'Select even birds',
+        description: {
+            selectorName: 'Nth Child Pseudo-selector',
+            title: 'Select an element by its order in another element',
+            syntax: ':nth-child(even)',
+            hint: 'It can take the form not only of a number (integer), but and keywords (odd or even), or a calculation (expression).',
+            examples: ['<tag>div p:nth-child(even)</tag> selects even <tag>p</tag> elements in every <tag>div</tag>']
+        },
+        answer: [2, 'bird:nth-child(even)']
+    },
+    {
+        level: 7,
+        nodes: ['branch', 
+            [
+                [
+                    {
+                        type:'nest'
+                    },
+                    [
+                        {
+                            type:'bird',
+                            className: ['dance']
+                        }
+                    ]
+                ], 
+                [
+                    {
+                        type:'nest'
+                    },
+                    [
+                        {
+                            type:'bird',
+                            className: ['dance', 'blue']
+                        }
+                    ]
+                ],
+                [
+                    {
+                        type:'nest'
+                    },
+                    [
+                        {
+                            type:'bird',
+                            className: ['dance', 'yellow']
+                        }
+                    ]
+                ]
+            ]
+        ],
+        task: 'Select odd bird in every nest',
+        description: {
+            selectorName: 'Nth Child Pseudo-selector',
+            title: 'Select an element by its order in another element',
+            syntax: ':nth-child(odd)',
+            hint: 'It can take the form not only of a number (integer), but and keywords (odd or even), or a calculation (expression).',
+            examples: ['<tag>div p:nth-child(odd)</tag> selects odd <tag>p</tag> elements in every <tag>div</tag>']
+        },
+        answer: [3, 'nest bird:nth-child(odd)']
+    },
+    {
+        level: 8,
+        nodes: ['branch', 
+            [
+                {
+                    type:'bird',
+                    className: ['yellow']
+                }, 
+                {
+                    type:'bird',
+                    className: ['red']
+                },
+                {
+                    type:'bird',
+                    className: ['dance', 'blue']
+                },
+                {
+                    type:'bird',
+                    className: ['blue']
+                }, 
+                {
+                    type:'bird',
+                    className: ['yellow']
+                },
+                {
+                    type:'bird',
+                    className: ['dance', 'red']
+                }
+            ]
+        ],
+        task: 'Select every third bird',
+        description: {
+            selectorName: 'Nth Child Pseudo-selector Selector with Formula',
+            title: 'Select an element by its order in another element.',
+            syntax: ':nth-child(an+b)',
+            hint: '<tag>a</tag> represents a cycle size, <tag>n</tag> is a counter (starts at 0), and <tag>b</tag> is an offset value',
+            examples: ['<tag>p:nth-child(3n+0)</tag> selects every third <tag>&lt;p&gt;</tag> element.']
+        },
+        answer: [2, 'bird:nth-child(3n+0)']
+    },
+    {
+        level: 9,
         nodes: ['branch', 
             [
                 [
