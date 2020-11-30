@@ -27,7 +27,7 @@ export default class App {
         this.editorComponent = new EditorComponent(this.level, levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer, 
                                                         (level, isDone, isWithHelp) => this.updateProgress(level, isDone, isWithHelp), 
                                                         (level) => this.changeLevel(level), this.maxLevel,
-                                                        () => this.checkIsAllLevelsDone());
+                                                        () => this.checkIsAllLevelsDone(), () => this.findFirstNotDoneLevel());
         this.levelPanelComponent = new LevelPanelComponent(levelsData[this.level - 1], () => this.writeAnswer());
         this.navigationComponent = new NavigationComponent(this.level, this.maxLevel, (level) => this.changeLevel(level), 
                                                                 (level) => this.checkIsLevelDone(level), (level) => this.checkIsUsedHelp(level));
@@ -144,6 +144,19 @@ export default class App {
 
     getLevelInProgress() {
         return this.progress.filter(level => level.id === this.level);
+    }
+
+    findFirstNotDoneLevel() {
+        let level = [];
+
+        for (let i = 0; i < this.maxLevel; i++) {
+            level = this.progress.filter(level => level.id === i + 1);
+
+            if (!level.length) {
+                return i + 1;
+            }
+        }
+        return 0;
     }
 
     writeAnswer() {

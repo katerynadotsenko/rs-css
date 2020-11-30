@@ -765,7 +765,7 @@ const levelsData = [
                 }
             ]
         ],
-        task: 'Select the bird with Kesha name',
+        task: 'Select the bird with the name Kesha',
         description: {
             selectorName: 'Attribute Value Selector',
             title: 'Select all elements that have a specific attribute value',
@@ -801,7 +801,7 @@ const levelsData = [
                 }
             ]
         ],
-        task: 'Select the bird names that start with \'Ri\'',
+        task: 'Select the birds whose name starts with \'Ri\'',
         description: {
             selectorName: 'Attribute Starts With Selector',
             title: 'Select all elements with an attribute value that starts with specific characters',
