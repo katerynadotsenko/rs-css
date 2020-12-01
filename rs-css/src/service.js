@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 export default class Service {
   constructor() {
     this.progressBirds = [];
@@ -44,7 +45,7 @@ export default class Service {
     localStorage.setItem('currentLevelBirds', this.currentLevelBirds);
   }
 
-  static clearData() {
+  clearData() {
     localStorage.removeItem('currentLevelBirds');
     localStorage.removeItem('progressBirds');
   }
