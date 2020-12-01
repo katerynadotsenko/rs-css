@@ -1,25 +1,25 @@
 export default class TaskComponent {
-    constructor(task) {
-        this.task = task;
-    }
+  constructor(task) {
+    this.task = task;
+  }
 
-    render() {
-        const wrapper = document.createElement('div');
-        wrapper.classList.add('wrapper', 'wrapper_task');
-        
-        const task = document.createElement('div');
-        task.classList.add('task');
-        task.innerText = `${this.task}`;
+  render() {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('wrapper', 'wrapper_task');
 
-        wrapper.append(task);
+    const task = document.createElement('div');
+    task.classList.add('task');
+    task.innerText = `${this.task}`;
 
-        return wrapper;
-    }
+    wrapper.append(task);
 
-    updateTask(task) {
-        this.task = task;
+    return wrapper;
+  }
 
-        const taskElement = document.querySelector('.task');
-        taskElement.innerText = `${this.task}`;
-    }
+  updateTask(task) {
+    this.task = task;
+
+    const taskElement = document.querySelector('.task');
+    taskElement.innerText = `${this.task}`;
+  }
 }

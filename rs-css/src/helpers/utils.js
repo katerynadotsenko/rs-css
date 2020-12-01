@@ -1,47 +1,46 @@
-function showTooltip (element, node) {
+function showTooltip(element, node) {
+  const tooltip = document.querySelector('.tooltip');
+  tooltip.style.display = 'block';
 
-    const tooltip = document.querySelector('.tooltip');
-    tooltip.style.display = 'block';
+  let stylesContent = '';
 
-    let stylesContent = '';
+  if (node.className) {
+    const classes = node.className.filter((item) => item !== 'dance');
+    stylesContent += classes.length ? ` class="${classes.join(' ')}"` : '';
+  }
 
-    if (node.className) {
-        const classes = node.className.filter(item => item !== 'dance');
-        stylesContent += classes.length ? ` class="${classes.join(' ')}"` : '';
-    }
+  if (node.id) {
+    stylesContent += ` id="${node.id}"`;
+  }
 
-    if (node.id) {
-        stylesContent += ` id="${node.id}"`;
-    }
+  if (node.attributeName) {
+    stylesContent += ` name="${node.attributeName}"`;
+  }
 
-    if (node.attributeName) {
-        stylesContent += ` name="${node.attributeName}"`;
-    }
+  tooltip.innerText = `<${node.type + stylesContent}></${node.type}>`;
 
-    tooltip.innerText = `<${node.type + stylesContent}></${node.type}>`;
+  const coords = element.getBoundingClientRect();
 
-    const coords = element.getBoundingClientRect();
+  const tooltipTop = `${coords.top - 50}px`;
+  const tooltipLeft = `${coords.left}px`;
 
-    const tooltipTop = `${coords.top - 50}px`;
-    const tooltipLeft = `${coords.left}px`;
-    
-    tooltip.style.top = tooltipTop;
-    tooltip.style.left = tooltipLeft;
+  tooltip.style.top = tooltipTop;
+  tooltip.style.left = tooltipLeft;
 }
 
 function hideTooltip() {
-    const tooltip = document.querySelector('.tooltip');
-    tooltip.style.display = 'none';
+  const tooltip = document.querySelector('.tooltip');
+  tooltip.style.display = 'none';
 }
 
 function showNotification() {
-    const notification = document.createElement('div');
-    notification.classList.add('notification');
+  const notification = document.createElement('div');
+  notification.classList.add('notification');
 
-    const notificationWindow = document.createElement('div');
-    notificationWindow.classList.add('notification__window');
+  const notificationWindow = document.createElement('div');
+  notificationWindow.classList.add('notification__window');
 
-    notificationWindow.innerHTML = `<div class="notification__header">
+  notificationWindow.innerHTML = `<div class="notification__header">
                                         Congratulations!
                                     </div>
                                     <div class="notification__content">
@@ -51,15 +50,27 @@ function showNotification() {
                                         Cool!
                                     </button>`;
 
-    notification.addEventListener('click', (e) => {
-        if (e.target.classList.contains('notification') || e.target.classList.contains('notification__button')) {
-            notification.remove();
-        }
-    });
+  notification.addEventListener('click', (e) => {
+    if (e.target.classList.contains('notification') || e.target.classList.contains('notification__button')) {
+      notification.remove();
+    }
+  });
 
-    notification.append(notificationWindow);
+  notification.append(notificationWindow);
 
-    document.body.append(notification);
+  document.body.append(notification);
 }
 
-export {showTooltip, hideTooltip, showNotification};
+const highlightWrapper = (content, type) => {
+  if (type === 'text') {
+    return document.createTextNode(content);
+  }
+  const wrapper = document.createElement('span');
+  wrapper.classList.add('highlight', type);
+  wrapper.textContent = content;
+  return wrapper;
+};
+
+export {
+  showTooltip, hideTooltip, showNotification, highlightWrapper,
+};

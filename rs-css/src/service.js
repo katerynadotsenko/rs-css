@@ -1,45 +1,51 @@
 export default class Service {
+  constructor() {
+    this.progressBirds = [];
+    this.currentLevelBirds = 1;
+  }
 
-    setProgress(id, isDone, isWithHelp) {
-        const progressBirds = this.getProgress();
-        const data = {
-            id: id,
-            isDone: isDone,
-            isWithHelp: isWithHelp
-        }
+  setProgress(id, isDone, isWithHelp) {
+    this.progressBirds = this.getProgress();
+    const data = {
+      id,
+      isDone,
+      isWithHelp,
+    };
 
-        let isExist = false;
-        for (let i in progressBirds) {
-            if (progressBirds[i].id === id) {
-                progressBirds[i] = data;
-                isExist = true;
-            }
-        }
-        
-        if (!isExist) {
-            progressBirds.push(data);
-        }
-        
-        localStorage.setItem('progressBirds', JSON.stringify(progressBirds));
+    let isExist = false;
 
+    const updatedProgress = this.progressBirds.map((item) => {
+      if (item.id === id) {
+        isExist = true;
+        return data;
+      }
+      return item;
+    });
+
+    if (!isExist) {
+      updatedProgress.push(data);
     }
 
-    getProgress() {
-        const progressBirds = JSON.parse(localStorage.getItem('progressBirds')) || [];
-        return progressBirds;
-    }
+    localStorage.setItem('progressBirds', JSON.stringify(updatedProgress));
+  }
 
-    getCurrentLevel() {
-        const currentLevelBirds = JSON.parse(localStorage.getItem('currentLevelBirds')) || 1;
-        return currentLevelBirds;
-    }
+  getProgress() {
+    this.progressBirds = JSON.parse(localStorage.getItem('progressBirds')) || [];
+    return this.progressBirds;
+  }
 
-    setCurrentLevel(currentLevel) {
-        localStorage.setItem('currentLevelBirds', currentLevel);
-    }
+  getCurrentLevel() {
+    this.currentLevelBirds = JSON.parse(localStorage.getItem('currentLevelBirds')) || 1;
+    return this.currentLevelBirds;
+  }
 
-    clearData() {
-        localStorage.removeItem("currentLevelBirds");
-        localStorage.removeItem("progressBirds");
-    }
+  setCurrentLevel(currentLevel) {
+    this.currentLevelBirds = currentLevel;
+    localStorage.setItem('currentLevelBirds', this.currentLevelBirds);
+  }
+
+  static clearData() {
+    localStorage.removeItem('currentLevelBirds');
+    localStorage.removeItem('progressBirds');
+  }
 }

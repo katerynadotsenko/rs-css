@@ -1,34 +1,45 @@
-import EditorCssPanelComponent from './editor-css-panel.component.js';
-import EditorHtmlPanelComponent from './editor-html-panel.component.js';
+import EditorCssPanelComponent from './editor-css-panel.component';
+import EditorHtmlPanelComponent from './editor-html-panel.component';
 
 export default class EditorComponent {
-    constructor(level, nodes, answer, updateProgress, changeLevel, maxLevel, checkIsAllLevelsDone, findFirstNotDoneLevel) {
-        this.nodes = nodes;
-        this.editorCssPanelComponent = new EditorCssPanelComponent(level, answer, updateProgress, changeLevel, maxLevel, checkIsAllLevelsDone, findFirstNotDoneLevel);
-        this.editorHtmlPanelComponent = new EditorHtmlPanelComponent(nodes);
-    }
+  constructor(level, nodes, answer, updateProgress, changeLevel, maxLevel,
+    checkIsAllLevelsDone, findFirstNotDoneLevel) {
+    this.nodes = nodes;
+    this.editorCssPanelComponent = new EditorCssPanelComponent(level, answer, updateProgress,
+      changeLevel, maxLevel, checkIsAllLevelsDone, findFirstNotDoneLevel,
+      () => this.shakeEditorWindow());
+    this.editorHtmlPanelComponent = new EditorHtmlPanelComponent(nodes);
+    this.editor = '';
+  }
 
-    render() {
-        const wrapper = document.createElement('div');
-        wrapper.classList.add('wrapper', 'wrapper_editor');
+  render() {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('wrapper', 'wrapper_editor');
 
-        const editor = document.createElement('div');
-        editor.classList.add('editor');
+    this.editor = document.createElement('div');
+    this.editor.classList.add('editor');
 
-        editor.append(this.editorCssPanelComponent.render());
-        editor.append(this.editorHtmlPanelComponent.render());
+    this.editor.append(this.editorCssPanelComponent.render());
+    this.editor.append(this.editorHtmlPanelComponent.render());
 
-        wrapper.append(editor);
+    wrapper.append(this.editor);
 
-        return wrapper;
-    }
+    return wrapper;
+  }
 
-    updateEditorComponents(level, nodes, answer) {
-        this.editorHtmlPanelComponent.updateHtml(nodes);
-        this.editorCssPanelComponent.updateCss(level, answer);
-    }
+  updateEditorComponents(level, nodes, answer) {
+    this.editorHtmlPanelComponent.updateHtml(nodes);
+    this.editorCssPanelComponent.updateCss(level, answer);
+  }
 
-    writeAnswer() {
-        this.editorCssPanelComponent.writeAnswer();
-    }
+  shakeEditorWindow() {
+    this.editor.classList.add('shake');
+    setTimeout(() => {
+      this.editor.classList.remove('shake');
+    }, 520);
+  }
+
+  writeAnswer() {
+    this.editorCssPanelComponent.writeAnswer();
+  }
 }
