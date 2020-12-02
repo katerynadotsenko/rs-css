@@ -20,8 +20,10 @@ export default class LevelPanelComponent {
     helpButton.classList.add('button');
     helpButton.innerText = 'Help';
 
-    helpButton.addEventListener('click', () => {
-      this.writeAnswer();
+    helpButton.addEventListener('click', async (e) => {
+      e.target.disabled = true;
+      await this.writeAnswer();
+      e.target.disabled = false;
     });
 
     return helpButton;

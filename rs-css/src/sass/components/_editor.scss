@@ -20,11 +20,13 @@
 
 .css-panel {
     flex-grow: 1;
+    flex-basis: 50%;
     height: 100%;
     overflow: hidden;
 
     @include media-medium {
         height: auto;
+        flex-basis: auto;
     }
 
     &__header {
@@ -64,29 +66,6 @@
         background: $color-light-2;
     }
 
-    &__input {
-        flex-grow: 1;
-        margin-right: 10px;
-        line-height: 2.2rem;
-        outline-style: none;
-        border: none;
-        background-color: transparent;
-
-        &.highlighting {
-            animation: highlighting .5s infinite;
-        }
-    }
-
-    @keyframes highlighting {
-        0% {
-            background-color: transparent;
-        }
-
-        100% {
-            background-color: $color-input;
-        }
-    }
-
     &__button {
         border: 1px solid $color-light;
         border-radius: 2px;
@@ -102,7 +81,12 @@
 
 .html-panel {
     flex-grow: 1;
+    flex-basis: 50%;
     overflow: hidden;
+
+    @include media-medium {
+        flex-basis: auto;
+    }
 
     &__header {
         display: flex;

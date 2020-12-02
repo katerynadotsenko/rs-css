@@ -72,15 +72,14 @@ export default class App {
     rightContainer.append(this.levelNavigationComponent.render());
     rightContainer.append(this.levelPanelComponent.render());
 
+    this.editorComponent.generateCodeMirrorInput();
+
     if (this.isRightPanelActive) {
       const menuToggle = document.querySelector('.navigation__menu-toggle');
       menuToggle.classList.add('active');
 
       rightContainer.classList.add('active');
     }
-
-    const cssPanelInput = document.querySelector('.css-panel__input');
-    cssPanelInput.focus();
   }
 
   resetProgress() {
@@ -165,8 +164,9 @@ export default class App {
     return 0;
   }
 
-  writeAnswer() {
-    this.editorComponent.writeAnswer();
+  async writeAnswer() {
+    await this.editorComponent.writeAnswer();
+
     const isWithHelp = true;
     let isDone = false;
     const levelData = this.getLevelInProgress();

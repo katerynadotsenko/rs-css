@@ -40,6 +40,10 @@ export default class EditorComponent {
   }
 
   writeAnswer() {
-    this.editorCssPanelComponent.writeAnswer();
+    return this.editorCssPanelComponent.writeAnswer();
+  }
+
+  generateCodeMirrorInput() {
+    this.editorCssPanelComponent.generateCodeMirrorInput();
   }
 }

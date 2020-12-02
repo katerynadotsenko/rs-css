@@ -1,3 +1,8 @@
+import Codemirror from 'codemirror/lib/codemirror';
+import 'codemirror/mode/css/css';
+import 'codemirror/lib/codemirror.css';
+import '../helpers/monokai.css';
+
 import { showNotification } from '../helpers/utils';
 
 const shakeElements = (selectorResult) => {
@@ -31,6 +36,7 @@ export default class EditorCssPanelComponent {
     this.findFirstNotDoneLevel = findFirstNotDoneLevel;
     this.shakeEditorWindow = shakeEditorWindow;
     this.isWithHelp = false;
+    this.codeMirrorInput = '';
   }
 
   render() {
@@ -41,24 +47,8 @@ export default class EditorCssPanelComponent {
     editorCssWindow.classList.add('css-panel__window');
     editorCssWindow.innerHTML = '<div class="css-panel__line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15</div>';
 
-    const input = document.createElement('input');
-    input.classList.add('css-panel__input', 'highlighting');
-    input.placeholder = 'Type in a CSS selector';
-
-    input.addEventListener('keyup', (e) => {
-      if (e.code === 'Enter') {
-        this.checkSelector();
-      }
-      if (input.value) {
-        input.classList.remove('highlighting');
-      } else {
-        input.classList.add('highlighting');
-      }
-    });
-
-    input.addEventListener('focusout', () => {
-      input.focus();
-    });
+    const input = document.createElement('textarea');
+    input.classList.add('css-panel__input');
 
     editorCssPanel.innerHTML = '<div class="css-panel__header"><span>CSS Editor</span><span>style.css</span></div>';
 
@@ -76,23 +66,77 @@ export default class EditorCssPanelComponent {
     return editorCssPanel;
   }
 
+  generateCodeMirrorInput() {
+    const cssPanelInput = document.querySelector('.css-panel__input');
+
+    this.codeMirrorInput = Codemirror.fromTextArea(cssPanelInput, {
+      lineNumbers: false,
+      styleActiveLine: true,
+      matchBrackets: true,
+      enterMode: 'flat',
+      theme: 'monokai',
+      smartIndent: false,
+      mode: 'css',
+    });
+
+    this.codeMirrorInput.focus();
+
+    this.codeMirrorInput.on('beforeChange', (instance, changeObj) => {
+      const text = changeObj.text.join('').replace(/\n/g, '');
+      changeObj.update(changeObj.from, changeObj.to, [text]);
+      return true;
+    });
+
+    const mirrorWrapper = document.querySelector('.CodeMirror-lines');
+    mirrorWrapper.classList.add('highlighting');
+
+    this.codeMirrorInput.on('change', (instance) => {
+      if (instance.getValue()) {
+        mirrorWrapper.classList.remove('highlighting');
+      } else {
+        mirrorWrapper.classList.add('highlighting');
+      }
+      this.codeMirrorInput.save();
+    });
+
+    this.codeMirrorInput.on('keyHandled', (instance, name, event) => {
+      if (event.code === 'Enter') {
+        this.checkSelector();
+      }
+    });
+  }
+
   updateCss(level, answer) {
     this.level = level;
     this.answer = answer;
     this.isWithHelp = false;
+    this.codeMirrorInput.setValue('');
+    this.codeMirrorInput.focus();
   }
 
   writeAnswer() {
     this.isWithHelp = true;
 
     const cssPanelInput = document.querySelector('.css-panel__input');
-    cssPanelInput.value = '';
+    cssPanelInput.value = this.answer;
+    this.codeMirrorInput.setValue('');
 
-    [...this.answer[1]].forEach((letter, i) => {
-      setTimeout(() => {
-        cssPanelInput.value += letter;
-      }, 100 * i);
-    });
+    this.codeMirrorInput.focus();
+
+    const promises = [...this.answer[1]].map((letter, i) => new Promise(
+      (resolve) => {
+        setTimeout(() => {
+          this.codeMirrorInput.setValue(this.codeMirrorInput.getValue() + letter);
+          this.codeMirrorInput.setCursor({
+            line: 0,
+            ch: i + 1,
+          });
+          resolve();
+        }, 100 * i);
+      },
+    ));
+
+    return Promise.all(promises);
   }
 
   checkSelector() {
@@ -122,13 +166,13 @@ export default class EditorCssPanelComponent {
 
           this.updateProgress(this.level, isDone, this.isWithHelp);
           cssPanelInput.value = '';
+          this.codeMirrorInput.setValue('');
 
           setTimeout(() => {
             const isAllLevelsDone = this.checkIsAllLevelsDone();
 
             if (this.level < this.maxLevel && !isAllLevelsDone) {
               this.changeLevel(this.level + 1);
-              cssPanelInput.classList.add('highlighting');
             } else if (isAllLevelsDone) {
               showNotification();
             } else {
