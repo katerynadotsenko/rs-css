@@ -164,7 +164,7 @@ export default class App {
     let level = [];
 
     for (let i = 0; i < this.maxLevel; i += 1) {
-      level = this.progress.filter((lev) => lev.id === i + 1);
+      level = this.progress.filter((lev) => lev.id === i + 1 && lev.isDone === true);
 
       if (!level.length) {
         return i + 1;

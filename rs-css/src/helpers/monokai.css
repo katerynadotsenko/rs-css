@@ -84,11 +84,11 @@
 }
 
 .cm-s-monokai span.cm-string {
-  color: #ccbf4b;
+  color: #3133b1;
 }
 
 .cm-s-monokai span.cm-variable {
-  color: #5a5a5a;
+  color: #f92626;
 }
 
 .cm-s-monokai span.cm-variable-2 {
@@ -131,6 +131,10 @@
 
 .cm-s-monokai .CodeMirror-matchingbracket {
   text-decoration: underline;
+}
+
+.cm-qualifier {
+  color: #8861cf;
 }
 
 .CodeMirror {
