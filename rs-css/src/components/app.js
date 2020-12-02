@@ -10,8 +10,6 @@ import levelsData from '../data/levels.data';
 
 import Service from '../service';
 
-// TODO shadow bg (menu) for devices
-
 const setRightPanelMode = () => {
   const windowSize = window.innerWidth;
 
@@ -61,8 +59,12 @@ export default class App {
     const rightContainer = document.createElement('div');
     rightContainer.classList.add('right-container');
 
+    const shadowContainer = document.createElement('div');
+    shadowContainer.classList.add('shadow-container');
+
     appContainer.append(leftContainer);
     appContainer.append(rightContainer);
+    appContainer.append(shadowContainer);
 
     leftContainer.append(this.taskComponent.render());
     leftContainer.append(this.gameComponent.render());

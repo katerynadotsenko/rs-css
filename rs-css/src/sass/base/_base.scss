@@ -31,6 +31,23 @@ h4 {
     overflow-x: hidden;
 }
 
+.shadow-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color-shadow;
+    display: none;
+    z-index: 9;
+
+    .right-container.active+& {
+        @include media-small {
+            display: block;
+        }
+    }
+}
+
 .left-container {
     flex-grow: 4;
     display: flex;
