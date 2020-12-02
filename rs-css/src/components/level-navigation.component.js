@@ -1,22 +1,29 @@
 export default class LevelNavigationComponent {
-  constructor(level, levelsData, checkIsLevelDone, checkIsUsedHelp, changeLevel, resetProgress) {
+  constructor(level, levelsData, checkIsLevelDone, checkIsUsedHelp,
+    changeLevel, resetProgress, toggleLevelNavigation) {
     this.level = level;
     this.levelsData = levelsData;
     this.checkIsLevelDone = checkIsLevelDone;
     this.checkIsUsedHelp = checkIsUsedHelp;
     this.changeLevel = changeLevel;
     this.resetProgress = resetProgress;
+    this.toggleLevelNavigation = toggleLevelNavigation;
     this.levelsNavigationContainer = '';
+    this.levelsNavigation = '';
   }
 
   render() {
-    const levelsNavigation = document.createElement('div');
-    levelsNavigation.classList.add('levels-navigation');
+    this.levelsNavigation = document.createElement('div');
+    this.levelsNavigation.classList.add('levels-navigation');
 
-    levelsNavigation.append(this.generateLevelsList());
-    levelsNavigation.append(this.generateResetProgressButton());
+    this.levelsNavigation.append(this.generateLevelsList());
+    this.levelsNavigation.append(this.generateResetProgressButton());
 
-    return levelsNavigation;
+    return this.levelsNavigation;
+  }
+
+  toggleLevelNavigationPanel() {
+    this.levelsNavigation.classList.toggle('active');
   }
 
   generateLevelsList() {
@@ -47,6 +54,7 @@ export default class LevelNavigationComponent {
 
       levelsNavigationItem.addEventListener('click', () => {
         this.changeLevel(level.level);
+        this.toggleLevelNavigation();
       });
 
       this.levelsNavigationContainer.append(levelsNavigationItem);

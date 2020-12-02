@@ -2,17 +2,22 @@ export default class LevelPanelComponent {
   constructor(levelDescription, writeAnswer) {
     this.levelDescription = levelDescription;
     this.writeAnswer = writeAnswer;
+    this.levelPanel = '';
   }
 
   render() {
-    const levelPanel = document.createElement('div');
-    levelPanel.classList.add('level-panel');
-    levelPanel.classList.add('active');
+    this.levelPanel = document.createElement('div');
+    this.levelPanel.classList.add('level-panel');
+    this.levelPanel.classList.add('active');
 
-    levelPanel.append(this.generateLevelDescriptionView());
-    levelPanel.append(this.generateHelpButton());
+    this.levelPanel.append(this.generateLevelDescriptionView());
+    this.levelPanel.append(this.generateHelpButton());
 
-    return levelPanel;
+    return this.levelPanel;
+  }
+
+  toggleLevelPanel() {
+    this.levelPanel.classList.toggle('active');
   }
 
   generateHelpButton() {

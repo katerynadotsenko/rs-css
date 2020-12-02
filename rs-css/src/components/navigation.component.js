@@ -1,10 +1,13 @@
 export default class NavigationComponent {
-  constructor(level, maxLevel, changeLevel, checkIsLevelDone, checkIsUsedHelp) {
+  constructor(level, maxLevel, changeLevel, checkIsLevelDone,
+    checkIsUsedHelp, toggleLevelNavigation) {
     this.level = level;
     this.maxLevel = maxLevel;
     this.changeLevel = changeLevel;
     this.checkIsLevelDone = checkIsLevelDone;
     this.checkIsUsedHelp = checkIsUsedHelp;
+    this.toggleLevelNavigation = toggleLevelNavigation;
+    this.levelListButton = '';
   }
 
   render() {
@@ -44,10 +47,10 @@ export default class NavigationComponent {
     menuToggle.innerHTML = '<span></span>';
     this.bindNavButtonListener('toggle-menu', menuToggle);
 
-    const chooseLevelButton = document.createElement('button');
-    chooseLevelButton.classList.add('navigation__choose-level-button');
-    chooseLevelButton.innerText = 'choose a level';
-    this.bindNavButtonListener('toggle-level-list', chooseLevelButton);
+    this.levelListButton = document.createElement('button');
+    this.levelListButton.classList.add('navigation__choose-level-button');
+    this.levelListButton.innerText = 'choose a level';
+    this.bindNavButtonListener('toggle-level-list', this.levelListButton);
 
     navigationArrows.append(buttonPrev);
     navigationArrows.append(buttonNext);
@@ -56,7 +59,7 @@ export default class NavigationComponent {
     document.body.append(menuToggle);
 
     navigation.append(navigationTop);
-    navigation.append(chooseLevelButton);
+    navigation.append(this.levelListButton);
 
     return navigation;
   }
@@ -74,6 +77,10 @@ export default class NavigationComponent {
                                         <span class="level__with-help ${isWithHelp ? 'active' : ''} material-icons">
                                             remove_red_eye
                                         </span>`;
+  }
+
+  toggleLevelListButton() {
+    this.levelListButton = this.levelListButton.innerText === 'show description' ? 'choose a level' : 'show description';
   }
 
   bindNavButtonListener(value, buttonElement) {
@@ -102,18 +109,8 @@ export default class NavigationComponent {
         });
         break;
       case 'toggle-level-list':
-        buttonElement.addEventListener('click', (e) => {
-          const levelsNavigation = document.querySelector('.levels-navigation');
-          const levelPanel = document.querySelector('.level-panel');
-
-          levelPanel.classList.toggle('active');
-          levelsNavigation.classList.toggle('active');
-
-          if (levelsNavigation.classList.contains('active')) {
-            e.target.innerText = 'show description';
-          } else {
-            e.target.innerText = 'choose a level';
-          }
+        buttonElement.addEventListener('click', () => {
+          this.toggleLevelNavigation();
         });
         break;
       default:

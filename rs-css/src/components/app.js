@@ -39,11 +39,12 @@ export default class App {
       () => this.writeAnswer());
     this.navigationComponent = new NavigationComponent(this.level, this.maxLevel,
       (level) => this.changeLevel(level),
-      (level) => this.checkIsLevelDone(level), (level) => this.checkIsUsedHelp(level));
+      (level) => this.checkIsLevelDone(level), (level) => this.checkIsUsedHelp(level),
+      () => this.toggleLevelNavigation());
     this.levelNavigationComponent = new LevelNavigationComponent(this.level, levelsData,
       (level) => this.checkIsLevelDone(level),
       (level) => this.checkIsUsedHelp(level), (level) => this.changeLevel(level),
-      () => this.resetProgress());
+      () => this.resetProgress(), () => this.toggleLevelNavigation());
   }
 
   init() {
@@ -90,6 +91,12 @@ export default class App {
     this.changeLevel(currentLevel);
     this.levelNavigationComponent.resetNavigationLevelList();
     this.navigationComponent.updateNavigationLevel(currentLevel);
+  }
+
+  toggleLevelNavigation() {
+    this.navigationComponent.toggleLevelListButton();
+    this.levelPanelComponent.toggleLevelPanel();
+    this.levelNavigationComponent.toggleLevelNavigationPanel();
   }
 
   changeLevel(level) {
