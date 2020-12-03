@@ -17,7 +17,14 @@ export default class LevelPanelComponent {
   }
 
   toggleLevelPanel() {
+    const levelPanelDescription = this.levelPanel.querySelector('.level-panel__description');
+    levelPanelDescription.classList.remove('scroll');
+
     this.levelPanel.classList.toggle('active');
+
+    setTimeout(() => {
+      levelPanelDescription.classList.add('scroll');
+    }, 300);
   }
 
   generateHelpButton() {
@@ -44,6 +51,7 @@ export default class LevelPanelComponent {
 
     const levelPanelDescription = document.createElement('div');
     levelPanelDescription.classList.add('level-panel__description');
+    levelPanelDescription.classList.add('scroll');
 
     levelPanelDescription.innerHTML = `<h3>${this.levelDescription.description.selectorName}</h3>
                                             <span class="description__title">${this.levelDescription.description.title}</span>

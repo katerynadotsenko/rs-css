@@ -104,8 +104,16 @@ export default class NavigationComponent {
       case 'toggle-menu':
         buttonElement.addEventListener('click', () => {
           const rightContainer = document.querySelector('.right-container');
+          const windowSize = window.innerWidth;
+
           buttonElement.classList.toggle('active');
           rightContainer.classList.toggle('active');
+
+          if (windowSize <= 768 && rightContainer.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+          } else {
+            document.body.style.overflow = 'auto';
+          }
         });
         break;
       case 'toggle-level-list':

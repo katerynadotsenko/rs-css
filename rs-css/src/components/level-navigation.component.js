@@ -23,12 +23,19 @@ export default class LevelNavigationComponent {
   }
 
   toggleLevelNavigationPanel() {
+    this.levelsNavigationContainer.classList.remove('scroll');
+
     this.levelsNavigation.classList.toggle('active');
+
+    setTimeout(() => {
+      this.levelsNavigationContainer.classList.add('scroll');
+    }, 300);
   }
 
   generateLevelsList() {
     this.levelsNavigationContainer = document.createElement('div');
     this.levelsNavigationContainer.classList.add('levels-navigation__container');
+    this.levelsNavigationContainer.classList.add('scroll');
 
     this.levelsData.forEach((level) => {
       const isDone = this.checkIsLevelDone(level.level);

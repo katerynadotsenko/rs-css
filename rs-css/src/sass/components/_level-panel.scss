@@ -18,8 +18,11 @@
     &__description {
         display: flex;
         flex-direction: column;
-        overflow-y: auto;
         margin-bottom: 10px;
+
+        &.scroll {
+            overflow-y: auto;
+        }
     }
 }
 
