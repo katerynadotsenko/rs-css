@@ -163,3 +163,20 @@ tag {
         transform: translateX(-5px);
     }
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: $color-dark-2;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $color-dark-3;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $color-primary;
+}

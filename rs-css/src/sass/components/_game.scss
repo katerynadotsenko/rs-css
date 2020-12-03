@@ -131,6 +131,12 @@
     margin: 0 15px;
     z-index: 1;
 
+    @include media-small {
+        width: 24vw;
+        height: 22vw;
+        border: 2px solid transparent;
+    }
+
     &:after {
         content: '';
         position: absolute;
