@@ -1,7 +1,9 @@
 export default class LevelPanelComponent {
-  constructor(levelDescription, writeAnswer) {
+  constructor(levelDescription, writeAnswer, toggleMenu, windowSize) {
     this.levelDescription = levelDescription;
     this.writeAnswer = writeAnswer;
+    this.toggleMenu = toggleMenu;
+    this.windowSize = windowSize;
     this.levelPanel = '';
   }
 
@@ -34,6 +36,9 @@ export default class LevelPanelComponent {
 
     helpButton.addEventListener('click', async (e) => {
       e.target.disabled = true;
+      if (this.windowSize <= 768) {
+        this.toggleMenu();
+      }
       await this.writeAnswer();
       e.target.disabled = false;
     });

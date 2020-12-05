@@ -27,9 +27,9 @@ export default class EditorComponent {
     return wrapper;
   }
 
-  updateEditorComponents(level, nodes, answer) {
+  updateEditorComponents(level, nodes, answer, isFocusOnCssInput) {
     this.editorHtmlPanelComponent.updateHtml(nodes);
-    this.editorCssPanelComponent.updateCss(level, answer);
+    this.editorCssPanelComponent.updateCss(level, answer, isFocusOnCssInput);
   }
 
   shakeEditorWindow() {

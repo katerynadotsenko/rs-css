@@ -106,12 +106,14 @@ export default class EditorCssPanelComponent {
     });
   }
 
-  updateCss(level, answer) {
+  updateCss(level, answer, isFocusOnCssInput) {
     this.level = level;
     this.answer = answer;
     this.isWithHelp = false;
     this.codeMirrorInput.setValue('');
-    this.codeMirrorInput.focus();
+    if (isFocusOnCssInput) {
+      this.codeMirrorInput.focus();
+    }
   }
 
   writeAnswer() {

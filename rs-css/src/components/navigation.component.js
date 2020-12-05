@@ -42,11 +42,6 @@ export default class NavigationComponent {
     buttonNext.innerHTML = '<span class="material-icons">arrow_forward_ios</span>';
     this.bindNavButtonListener('next', buttonNext);
 
-    const menuToggle = document.createElement('div');
-    menuToggle.classList.add('navigation__menu-toggle');
-    menuToggle.innerHTML = '<span></span>';
-    this.bindNavButtonListener('toggle-menu', menuToggle);
-
     this.levelListButton = document.createElement('button');
     this.levelListButton.classList.add('navigation__choose-level-button');
     this.levelListButton.innerText = 'choose a level';
@@ -56,7 +51,6 @@ export default class NavigationComponent {
     navigationArrows.append(buttonNext);
 
     navigationTop.append(navigationArrows);
-    document.body.append(menuToggle);
 
     navigation.append(navigationTop);
     navigation.append(this.levelListButton);
@@ -80,7 +74,7 @@ export default class NavigationComponent {
   }
 
   toggleLevelListButton() {
-    this.levelListButton = this.levelListButton.innerText === 'show description' ? 'choose a level' : 'show description';
+    this.levelListButton.innerText = this.levelListButton.innerText === 'show description' ? 'choose a level' : 'show description';
   }
 
   bindNavButtonListener(value, buttonElement) {
@@ -98,21 +92,6 @@ export default class NavigationComponent {
           if (this.level < this.maxLevel) {
             this.level += 1;
             this.changeLevel(this.level);
-          }
-        });
-        break;
-      case 'toggle-menu':
-        buttonElement.addEventListener('click', () => {
-          const rightContainer = document.querySelector('.right-container');
-          const windowSize = window.innerWidth;
-
-          buttonElement.classList.toggle('active');
-          rightContainer.classList.toggle('active');
-
-          if (windowSize <= 768 && rightContainer.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-          } else {
-            document.body.style.overflow = 'auto';
           }
         });
         break;

@@ -10,35 +10,36 @@ import levelsData from '../data/levels.data';
 
 import Service from '../service';
 
-const setRightPanelMode = () => {
-  const windowSize = window.innerWidth;
-
-  return windowSize > 768;
-};
-
 export default class App {
   constructor() {
     this.service = new Service();
-
-    this.isRightPanelActive = setRightPanelMode();
 
     this.progress = this.service.getProgress();
     this.level = this.service.getCurrentLevel();
     this.maxLevel = levelsData.length;
 
+    this.windowSize = window.innerWidth;
+    this.isRightPanelActive = this.setRightPanelMode();
+    this.rightContainer = '';
+    this.menuToggleButton = '';
+
     this.taskComponent = new TaskComponent(levelsData[this.level - 1].task);
     this.gameComponent = new GameComponent(levelsData[this.level - 1].nodes);
+
     this.editorComponent = new EditorComponent(this.level, levelsData[this.level - 1].nodes,
       levelsData[this.level - 1].answer,
       (level, isDone, isWithHelp) => this.updateProgress(level, isDone, isWithHelp),
       (level) => this.changeLevel(level), this.maxLevel,
       () => this.checkIsAllLevelsDone(), () => this.findFirstNotDoneLevel());
+
     this.levelPanelComponent = new LevelPanelComponent(levelsData[this.level - 1],
-      () => this.writeAnswer());
+      () => this.writeAnswer(), () => this.toggleMenu(), this.windowSize);
+
     this.navigationComponent = new NavigationComponent(this.level, this.maxLevel,
       (level) => this.changeLevel(level),
       (level) => this.checkIsLevelDone(level), (level) => this.checkIsUsedHelp(level),
       () => this.toggleLevelNavigation());
+
     this.levelNavigationComponent = new LevelNavigationComponent(this.level, levelsData,
       (level) => this.checkIsLevelDone(level),
       (level) => this.checkIsUsedHelp(level), (level) => this.changeLevel(level),
@@ -56,14 +57,14 @@ export default class App {
     const leftContainer = document.createElement('div');
     leftContainer.classList.add('left-container');
 
-    const rightContainer = document.createElement('div');
-    rightContainer.classList.add('right-container');
+    this.rightContainer = document.createElement('div');
+    this.rightContainer.classList.add('right-container');
 
     const shadowContainer = document.createElement('div');
     shadowContainer.classList.add('shadow-container');
 
     appContainer.append(leftContainer);
-    appContainer.append(rightContainer);
+    appContainer.append(this.rightContainer);
     appContainer.append(shadowContainer);
 
     leftContainer.append(this.taskComponent.render());
@@ -71,18 +72,28 @@ export default class App {
     leftContainer.append(this.editorComponent.render());
     leftContainer.append(footerComponent());
 
-    rightContainer.append(this.navigationComponent.render());
-    rightContainer.append(this.levelNavigationComponent.render());
-    rightContainer.append(this.levelPanelComponent.render());
+    this.rightContainer.append(this.navigationComponent.render());
+    this.rightContainer.append(this.levelNavigationComponent.render());
+    this.rightContainer.append(this.levelPanelComponent.render());
 
     this.editorComponent.generateCodeMirrorInput();
 
-    if (this.isRightPanelActive) {
-      const menuToggle = document.querySelector('.navigation__menu-toggle');
-      menuToggle.classList.add('active');
+    this.menuToggleButton = document.createElement('div');
+    this.menuToggleButton.classList.add('navigation__menu-toggle');
+    this.menuToggleButton.innerHTML = '<span></span>';
 
-      rightContainer.classList.add('active');
+    this.menuToggleButton.addEventListener('click', () => this.toggleMenu());
+
+    document.body.append(this.menuToggleButton);
+
+    if (this.isRightPanelActive) {
+      this.menuToggleButton.classList.add('active');
+      this.rightContainer.classList.add('active');
     }
+  }
+
+  setRightPanelMode() {
+    return this.windowSize > 768;
   }
 
   resetProgress() {
@@ -93,6 +104,17 @@ export default class App {
     this.changeLevel(currentLevel);
     this.levelNavigationComponent.resetNavigationLevelList();
     this.navigationComponent.updateNavigationLevel(currentLevel);
+  }
+
+  toggleMenu() {
+    this.menuToggleButton.classList.toggle('active');
+    this.rightContainer.classList.toggle('active');
+
+    if (this.windowSize <= 768 && this.rightContainer.classList.contains('active')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
   }
 
   toggleLevelNavigation() {
@@ -108,8 +130,9 @@ export default class App {
 
     this.levelPanelComponent.updateLevelDescription(levelsData[this.level - 1]);
     this.gameComponent.updateNodes(levelsData[this.level - 1].nodes);
+    const isFocusOnCssInput = this.windowSize > 768;
     // eslint-disable-next-line max-len
-    this.editorComponent.updateEditorComponents(this.level, levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer);
+    this.editorComponent.updateEditorComponents(this.level, levelsData[this.level - 1].nodes, levelsData[this.level - 1].answer, isFocusOnCssInput);
     this.taskComponent.updateTask(levelsData[this.level - 1].task);
     this.navigationComponent.updateNavigationLevel(this.level);
     this.levelNavigationComponent.updateActiveLevel(this.level);

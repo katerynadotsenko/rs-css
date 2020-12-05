@@ -132,6 +132,10 @@ tag {
     background-color: $color-light-2;
     padding: 10px;
     z-index: 10;
+
+    @include media-small {
+        font-size: 1.4rem;
+    }
 }
 
 .shake {

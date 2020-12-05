@@ -167,7 +167,8 @@
 
 .CodeMirror-lines.highlighting {
   position: relative;
-  background-color: #d0e7c7;
+  background-color: transparent;
+  animation: highlight-input .5s infinite;
 }
 
 .CodeMirror-lines.highlighting:before {
@@ -176,4 +177,14 @@
   top: 0;
   left: 10px;
   color: #95ad8a;
+}
+
+@keyframes highlight-input {
+  0% {
+    background-color: transparent;
+  }
+
+  100% {
+    background-color: #d0e7c7;
+  }
 }
