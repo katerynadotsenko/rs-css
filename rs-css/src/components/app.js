@@ -19,7 +19,7 @@ export default class App {
     this.maxLevel = levelsData.length;
 
     this.windowSize = window.innerWidth;
-    this.isRightPanelActive = this.setRightPanelMode();
+    this.isRightPanelActive = this.checkRightPanelMode();
     this.rightContainer = '';
     this.menuToggleButton = '';
 
@@ -92,7 +92,7 @@ export default class App {
     }
   }
 
-  setRightPanelMode() {
+  checkRightPanelMode() {
     return this.windowSize > 768;
   }
 
